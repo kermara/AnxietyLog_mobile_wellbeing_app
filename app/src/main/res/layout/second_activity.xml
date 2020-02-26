@@ -13,21 +13,23 @@
         android:text="Anxiety Test"
         android:textSize="38sp"/>
 
-    <TextView
+    <EditText
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="********Name*********"
+        android:text="Name"
+        android:inputType="text"
         android:textSize="18sp"
         android:layout_marginTop="240dp"
-        android:maxWidth="300dp"/>
-    <TextView
+        android:maxWidth="300dp" />
+    <EditText
         android:id="@+id/emailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="*********Email********"
+        android:text="Email"
+        android:inputType="text"
         android:textSize="18sp"
         android:layout_marginTop="280dp"
         android:maxWidth="300dp"/>
