@@ -3,8 +3,7 @@
 
 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignParentBottom="true"
@@ -24,11 +23,11 @@
         android:id="@+id/text_view_question_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
         android:layout_marginLeft="35dp"
+        android:layout_marginTop="130dp"
 
 
-        android:text="Question 1/7" />
+        />
 
     <TextView
         android:id="@+id/text_view_question"
@@ -42,7 +41,7 @@
         android:textSize="20dp" />
 
     <RadioGroup
-        android:id="@+id/radio_group"
+        android:id="@+id/radio_group1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -114,6 +113,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="405dp"
         android:layout_marginLeft="40dp"
+        />
+    <ImageView
+        android:id="@+id/blinkView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         />
 
 </RelativeLayout>

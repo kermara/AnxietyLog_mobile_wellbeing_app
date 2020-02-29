@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 public class QuizActivity extends SecondActivity {
 
-    private String[] questions = {"Feeling nervous, anxious, or on edge", "kysymys 2", "kysymys 3", "kysymys 4", "kysymys 5 ", "kysymys 6", "kysymys 7"};
+    private String[] questions = {"question 1", "question 2", "question 3", "question 4", "question 5 ", "question 6", "question 7"};
     private int[][] answeredQuestions = new int[2][7];
     private int questionNumber = 1;
     private RadioButton rb1, rb2, rb3, rb4;
     private RadioGroup rg1;
-    private TextView questionTV, errorView;
+    private TextView questionTV, errorView, questionNumberView;
     private Button nextButton, backButton;
 
     @Override
@@ -23,17 +23,19 @@ public class QuizActivity extends SecondActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_activity);
 
-        rg1 = findViewById(R.id.radio_group);
+        rg1 = findViewById(R.id.radio_group1);
         rb1 = findViewById(R.id.radio_button_1);
         rb2 = findViewById(R.id.radio_button_2);
         rb3 = findViewById(R.id.radio_button_3);
         rb4 = findViewById(R.id.radio_button_4);
         questionTV = findViewById(R.id.text_view_question);
         errorView = findViewById(R.id.error_textView);
+        questionNumberView = findViewById(R.id. text_view_question_number);
         nextButton = findViewById(R.id.next_button);
         backButton = findViewById(R.id.back_button);
 
         questionTV.setText(questions[(questionNumber - 1)]);
+        questionNumberView.setText("Question " + questionNumber + "/7");
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +86,7 @@ public class QuizActivity extends SecondActivity {
         questionNumber++;
         errorView.setText("");
         questionTV.setText(questions[(questionNumber - 1)]);
+        questionNumberView.setText("Question " + questionNumber + "/7");
         rg1.clearCheck();
     }
 
@@ -92,6 +95,7 @@ public class QuizActivity extends SecondActivity {
         answeredQuestions[1][(questionNumber - 1)] = 0;
         errorView.setText("");
         questionTV.setText(questions[(questionNumber - 1)]);
+        questionNumberView.setText("Question " + questionNumber + "/7");
         rg1.clearCheck();
     }
 
@@ -114,4 +118,5 @@ public class QuizActivity extends SecondActivity {
         }
         return pointsTotal;
     }
+
 }
