@@ -47,7 +47,7 @@ public class QuizActivity extends SecondActivity {
                             break;
                         case 2:
                             answeredQuestions[1][(questionNumber - 1)] = 1;
-                            answeredQuestions[0][questionNumber] = questionNumber;
+                            answeredQuestions[0][(questionNumber - 1)] = questionNumber;
                             break;
                         case 3:
                             answeredQuestions[1][(questionNumber - 1)] = 2;
