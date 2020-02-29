@@ -106,6 +106,14 @@
         android:layout_marginLeft="200dp"
 
         android:text="Next" />
-
+    <TextView
+        android:textColor="#ff0000"
+        android:textSize="16sp"
+        android:id="@+id/error_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="405dp"
+        android:layout_marginLeft="40dp"
+        />
 
 </RelativeLayout>
