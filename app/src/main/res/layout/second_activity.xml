@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Name"
+        android:hint="Name"
         android:inputType="text"
         android:textSize="18sp"
         android:layout_marginTop="240dp"
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Email"
+        android:hint="Email"
         android:inputType="text"
         android:textSize="18sp"
         android:layout_marginTop="280dp"
@@ -40,5 +40,27 @@
         android:layout_height="wrap_content"
         android:text="Start Test"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="450dp"/>
+        android:layout_marginTop="450dp"
+        android:minWidth="150dp"/>
+
+    <Button
+        android:textSize="20sp"
+        android:id="@+id/create_user_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="create User"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="390dp"
+        android:minWidth="150dp"/>
+
+    <TextView
+        android:id="@+id/email_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
+        android:textSize="18sp"
+        android:textColor="#ff0000"/>
+
+
 </RelativeLayout>
