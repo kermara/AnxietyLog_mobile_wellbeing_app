@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent secondActivityIntent = new Intent(MainActivity.this, SecondActivity.class);
                 startActivity(secondActivityIntent);
+                overridePendingTransition(R. anim. slide_in_right, R. anim. slide_out_left);
             }
         });
     }

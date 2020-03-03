@@ -19,6 +19,7 @@ public class SecondActivity extends MainActivity {
             public void onClick(View v) {
                 Intent quizActivityIntent = new Intent(SecondActivity.this, QuizActivity.class);
                 startActivity(quizActivityIntent);
+                overridePendingTransition(R. anim. slide_in_right, R. anim. slide_out_left);
             }
         });
     }

@@ -1,22 +1,34 @@
 package com.example.mobileappgroup8;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class QuizActivity extends SecondActivity {
 
-    private String[] questions = {"question 1", "question 2", "question 3", "question 4", "question 5 ", "question 6", "question 7"};
+    private String[] questions = {"Feeling nervous, anxious or on edge?", "Not being able to stop or control worrying?", "Worrying too much about different things?", "Trouble relaxing?",
+            "Being so restless that it is hard to sit still?", "Becoming easily annoyed or irritable?", "Feeling afraid as if something awful might happen?"};
     private int[][] answeredQuestions = new int[2][7];
     private int questionNumber = 1;
     private RadioButton rb1, rb2, rb3, rb4;
     private RadioGroup rg1;
     private TextView questionTV, errorView, questionNumberView;
     private Button nextButton, backButton;
+    private Animation slideIn, slideOut, slideInBackwards, slideOutBackwards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +42,14 @@ public class QuizActivity extends SecondActivity {
         rb4 = findViewById(R.id.radio_button_4);
         questionTV = findViewById(R.id.text_view_question);
         errorView = findViewById(R.id.error_textView);
-        questionNumberView = findViewById(R.id. text_view_question_number);
+        questionNumberView = findViewById(R.id.text_view_question_number);
         nextButton = findViewById(R.id.next_button);
         backButton = findViewById(R.id.back_button);
+
+        slideIn = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
+        slideOut = AnimationUtils.loadAnimation(this, R.anim.slide_out_left);
+        slideInBackwards = AnimationUtils.loadAnimation(this, R.anim.slide_in_left);
+        slideOutBackwards = AnimationUtils.loadAnimation(this, R.anim.slide_in_left);
 
         questionTV.setText(questions[(questionNumber - 1)]);
         questionNumberView.setText("Question " + questionNumber + "/7");
@@ -64,6 +81,7 @@ public class QuizActivity extends SecondActivity {
                         Intent nextActivity = new Intent(QuizActivity.this, ResultActivity.class);
                         nextActivity.putExtra("Total points", pointTotal(answeredQuestions));
                         startActivity(nextActivity);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         finish();
                         return;
                     } else {
@@ -87,6 +105,10 @@ public class QuizActivity extends SecondActivity {
         errorView.setText("");
         questionTV.setText(questions[(questionNumber - 1)]);
         questionNumberView.setText("Question " + questionNumber + "/7");
+        rg1.startAnimation(slideOut);
+        questionTV.startAnimation(slideOut);
+        rg1.startAnimation(slideIn);
+        questionTV.startAnimation(slideIn);
         rg1.clearCheck();
     }
 
@@ -96,6 +118,10 @@ public class QuizActivity extends SecondActivity {
         errorView.setText("");
         questionTV.setText(questions[(questionNumber - 1)]);
         questionNumberView.setText("Question " + questionNumber + "/7");
+        rg1.startAnimation(slideOutBackwards);
+        questionTV.startAnimation(slideOutBackwards);
+        rg1.startAnimation(slideInBackwards);
+        questionTV.startAnimation(slideInBackwards);
         rg1.clearCheck();
     }
 
@@ -118,5 +144,4 @@ public class QuizActivity extends SecondActivity {
         }
         return pointsTotal;
     }
-
 }
