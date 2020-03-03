@@ -3,11 +3,10 @@
 
 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/relativeLayout"
+    android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignParentBottom="true"
-    android:animateLayoutChanges="true"
     android:padding="16dp">
 
 
@@ -16,8 +15,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginLeft="35dp"
         android:layout_marginTop="40dp"
+        android:layout_marginLeft="35dp"
         android:text="How often have you been bothered by the following over the past 2 weeks?" />
 
     <TextView
@@ -25,12 +24,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="130dp"
+
+
+        />
 
     <TextView
         android:id="@+id/text_view_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="36dp"
         android:layout_marginTop="174dp"
         android:text=""
@@ -41,8 +45,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="250dp">
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="35dp">
 
         <RadioButton
 
@@ -74,12 +78,22 @@
 
     </RadioGroup>
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="133dp"
+        android:layout_marginLeft="170dp"
+        android:scaleY="4"
+        android:scaleX="3" />
+
     <Button
         android:id="@+id/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
         android:layout_marginTop="450dp"
+        android:layout_marginLeft="35dp"
 
         android:text="Back" />
 
@@ -87,18 +101,18 @@
         android:id="@+id/next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
         android:layout_marginTop="450dp"
+        android:layout_marginLeft="250dp"
 
         android:text="Next" />
-
     <TextView
+        android:textColor="#ff0000"
+        android:textSize="16sp"
         android:id="@+id/error_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
         android:layout_marginTop="405dp"
-        android:textColor="#ff0000"
-        android:textSize="16sp" />
+        android:layout_marginLeft="40dp"
+        />
 
 </RelativeLayout>
