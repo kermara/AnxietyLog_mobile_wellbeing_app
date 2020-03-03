@@ -13,15 +13,42 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout. starting_activity);
+        setContentView(R.layout.starting_activity);
 
-        Button b = (Button)findViewById(R.id.start_button);
+        Button startTest = (Button) findViewById(R.id.start_test_button);
+        Button history = (Button) findViewById(R.id.history_button);
+        Button analysis = (Button) findViewById(R.id.analysis_button);
+        Button info = (Button) findViewById(R.id.info_button);
 
-        b.setOnClickListener(new View.OnClickListener() {
+        startTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent secondActivityIntent = new Intent(MainActivity.this, SecondActivity.class);
-                startActivity(secondActivityIntent);
+                Intent quizActivityIntent = new Intent(MainActivity.this, QuizActivity.class);
+                startActivity(quizActivityIntent);
+            }
+        });
+
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent historyActivityIntent = new Intent(MainActivity.this, HistoryActivity.class);
+                startActivity(historyActivityIntent);
+            }
+        });
+
+        analysis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent analysisActivityIntent = new Intent(MainActivity.this, AnalysisActivity.class);
+                startActivity(analysisActivityIntent);
+            }
+        });
+
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent infoActivityIntent = new Intent(MainActivity.this, AnalysisActivity.class);
+                startActivity(infoActivityIntent);
             }
         });
     }
