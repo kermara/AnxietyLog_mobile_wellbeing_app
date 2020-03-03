@@ -1,15 +1,10 @@
 package com.example.mobileappgroup8;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -17,15 +12,15 @@ import android.widget.TextView;
 
 public class QuizActivity extends MainActivity {
 
-    private String[] questions = {"Feeling nervous, anxious or on edge?", "Not being able to stop or control worrying?", "Worrying too much about different things?", "Trouble relaxing?",
+    protected String[] questions = {"Feeling nervous, anxious or on edge?", "Not being able to stop or control worrying?", "Worrying too much about different things?", "Trouble relaxing?",
             "Being so restless that it is hard to sit still?", "Becoming easily annoyed or irritable?", "Feeling afraid as if something awful might happen?"};
-    private int[][] answeredQuestions = new int[2][7];
-    private int questionNumber = 1;
-    private RadioButton rb1, rb2, rb3, rb4;
-    private RadioGroup rg1;
-    private TextView questionTV, errorView, questionNumberView;
-    private Button nextButton, backButton;
-    private Animation slideIn, slideOut, slideInBackwards, slideOutBackwards;
+    protected int[][] answeredQuestions = new int[2][7];
+    protected int questionNumber = 1;
+    protected RadioButton rb1, rb2, rb3, rb4;
+    protected RadioGroup rg1;
+    protected TextView questionTV, errorView, questionNumberView;
+    protected Button nextButton, backButton;
+    protected Animation slideIn, slideOut, slideInBackwards, slideOutBackwards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +41,11 @@ public class QuizActivity extends MainActivity {
         slideIn = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
         slideOut = AnimationUtils.loadAnimation(this, R.anim.slide_out_left);
         slideInBackwards = AnimationUtils.loadAnimation(this, R.anim.slide_in_left);
-        slideOutBackwards = AnimationUtils.loadAnimation(this, R.anim.slide_in_left);
+        slideOutBackwards = AnimationUtils.loadAnimation(this, R.anim.slide_out_right);
 
         questionTV.setText(questions[(questionNumber - 1)]);
         questionNumberView.setText("Question " + questionNumber + "/7");
+
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +78,9 @@ public class QuizActivity extends MainActivity {
                         finish();
                         return;
                     } else {
+
                         nextQuestion();
+
                     }
                 }
             }
