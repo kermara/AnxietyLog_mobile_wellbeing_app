@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="14dp"
-    android:background="@color/colorPrimaryDark">
+    android:padding="14dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -12,23 +10,59 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
         android:text="Anxiety Test"
-        android:textSize="38sp" />
+        android:textSize="38sp"/>
+
+
     <Button
         android:textSize="20sp"
-        android:id="@+id/start_button"
+        android:id="@+id/start_test_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Begin"
-        android:layout_centerInParent="true"
-        />
+        android:text="Start Test"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:minWidth="150dp"/>
 
-    <TextView
-        android:textSize="14sp"
+    <Button
+        android:textSize="20sp"
+        android:id="@+id/history_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="History"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="375dp"
+        android:minWidth="150dp"/>
+
+    <Button
+        android:textSize="20sp"
+        android:id="@+id/analysis_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Analysis"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="450dp"
+        android:minWidth="150dp"/>
+
+    <Button
+        android:textSize="18sp"
+        android:id="@+id/info_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="450dp"
-        android:maxWidth="300dp"
-        android:text="INFO INFO INFO INFO INFO INFO INFO INFO INFO INFO INFO INFO INFO INFO INFO INFO INFO INFO INFO INFO INFO INFO INFO INFO "/>
+        android:text="Info"
+        android:layout_marginTop="525dp"
+        android:minWidth="150dp"/>
+
+
+    <TextView
+        android:id="@+id/email_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
+        android:textSize="18sp"
+        android:textColor="#ff0000"/>
+
+
 
 </RelativeLayout>
