@@ -14,12 +14,11 @@ public class ResultActivity extends QuizActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result_activity);
 
-        resultView = findViewById(R.id. score_result);
+        resultView = findViewById(R.id.score_result);
 
         Intent lastActivityIntent = getIntent();
-        int totalPoints = lastActivityIntent.getIntExtra("Total points", 0);
+        float totalPoints = lastActivityIntent.getIntExtra("Total points", 0);
 
-        resultView.setText(Integer.toString(totalPoints));
-
+        resultView.setText(Float.toString(totalPoints));
     }
 }

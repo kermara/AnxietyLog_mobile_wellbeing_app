@@ -20,7 +20,7 @@ public class QuizActivity extends MainActivity {
     protected RadioGroup rg1;
     protected TextView questionTV, errorView, questionNumberView;
     protected Button nextButton, backButton;
-    protected Animation slideIn, slideOut, slideInBackwards, slideOutBackwards;
+    protected Animation slideIn, slideOut, slideInBackwards, slideOutBackwards, rgSlideIn, rgSlideOut, rgSlideInBackwards, rgSlideOutBackwards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,10 @@ public class QuizActivity extends MainActivity {
         slideOut = AnimationUtils.loadAnimation(this, R.anim.slide_out_left);
         slideInBackwards = AnimationUtils.loadAnimation(this, R.anim.slide_in_left);
         slideOutBackwards = AnimationUtils.loadAnimation(this, R.anim.slide_out_right);
+        rgSlideIn = AnimationUtils.loadAnimation(this, R.anim.rg_slide_in_right);
+        rgSlideOut = AnimationUtils.loadAnimation(this, R.anim.rg_slide_out_left);
+        rgSlideInBackwards = AnimationUtils.loadAnimation(this, R.anim.rg_slide_in_left);
+        rgSlideOutBackwards = AnimationUtils.loadAnimation(this, R.anim.rg_slide_out_right);
 
         questionTV.setText(questions[(questionNumber - 1)]);
         questionNumberView.setText("Question " + questionNumber + "/7");
@@ -78,9 +82,7 @@ public class QuizActivity extends MainActivity {
                         finish();
                         return;
                     } else {
-
                         nextQuestion();
-
                     }
                 }
             }
@@ -90,6 +92,9 @@ public class QuizActivity extends MainActivity {
             public void onClick(View v) {
                 if (questionNumber > 1) {
                     previousQuestion();
+                    if (questionNumber != 1) {
+                        backButton.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         });
@@ -97,26 +102,26 @@ public class QuizActivity extends MainActivity {
 
     protected void nextQuestion() {
         questionNumber++;
+        if (questionNumber != 1) {
+            backButton.setVisibility(View.VISIBLE);
+        }
+        startAnimations(true);
         errorView.setText("");
         questionTV.setText(questions[(questionNumber - 1)]);
         questionNumberView.setText("Question " + questionNumber + "/7");
-        rg1.startAnimation(slideOut);
-        questionTV.startAnimation(slideOut);
-        rg1.startAnimation(slideIn);
-        questionTV.startAnimation(slideIn);
         rg1.clearCheck();
     }
 
     protected void previousQuestion() {
         questionNumber--;
+        if (questionNumber == 1) {
+            backButton.setVisibility(View.INVISIBLE);
+        }
+        startAnimations(false);
         answeredQuestions[1][(questionNumber - 1)] = 0;
         errorView.setText("");
         questionTV.setText(questions[(questionNumber - 1)]);
         questionNumberView.setText("Question " + questionNumber + "/7");
-        rg1.startAnimation(slideOutBackwards);
-        questionTV.startAnimation(slideOutBackwards);
-        rg1.startAnimation(slideInBackwards);
-        questionTV.startAnimation(slideInBackwards);
         rg1.clearCheck();
     }
 
@@ -132,11 +137,25 @@ public class QuizActivity extends MainActivity {
         return buttonSelection;
     }
 
-    protected int pointTotal(int[][] matrix) {
-        int pointsTotal = 0;
+    protected float pointTotal(int[][] matrix) {
+        float pointsTotal = 0;
         for (int i = 0; i < 7; i++) {
             pointsTotal += matrix[1][i];
         }
         return pointsTotal;
+    }
+
+    protected void startAnimations(boolean nextQuestion) {
+        if (nextQuestion == true) {
+            questionTV.startAnimation(slideOut);
+            questionTV.startAnimation(slideIn);
+            rg1.startAnimation(rgSlideOut);
+            rg1.startAnimation(rgSlideIn);
+        } else {
+            questionTV.startAnimation(slideOutBackwards);
+            questionTV.startAnimation(slideInBackwards);
+            rg1.startAnimation(rgSlideOutBackwards);
+            rg1.startAnimation(rgSlideInBackwards);
+        }
     }
 }
