@@ -26,31 +26,12 @@ public class ResultActivity extends QuizActivity {
         Button history = findViewById(R.id.history_button_result);
         Button analysis = findViewById(R.id.analysis_button_result);
         Button home = findViewById(R.id.home_button_result);
-        TextView tv = findViewById(R.id.shared_pref);
         testDates = new ArrayList<String>();
 
         Intent quizIntent = getIntent();
         float totalPoints = quizIntent.getFloatExtra("Total points", 0);
         int totalPointsForDisplaying = (int) (totalPoints);
         resultView.setText(Integer.toString(totalPointsForDisplaying));
-
-        SharedPreferences prefGet = getSharedPreferences("Saved Points", MODE_PRIVATE);
-        Map<String, ?> all = prefGet.getAll();
-
-        SharedPreferences prefSave = getSharedPreferences("Saved Points", MODE_PRIVATE);
-        SharedPreferences.Editor prefEditor = prefSave.edit();
-        //this.getSharedPreferences("Saved Points", 0).edit().clear().commit();
-
-        prefEditor.putInt(getDate(), totalPointsForDisplaying);
-        testDates.add(getDate());
-        prefEditor.commit();
-
-
-
-        /*for(Map.Entry<String, ?> entry : all.entrySet()){
-            tv.setText(entry.getKey() + ": " + entry.getValue().toString());
-        }*/
-
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override
