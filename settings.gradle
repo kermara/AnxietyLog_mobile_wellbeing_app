@@ -1,0 +1,2 @@
+rootProject.name='Database_points'
+include ':app'
