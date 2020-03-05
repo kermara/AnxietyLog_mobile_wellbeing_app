@@ -21,7 +21,7 @@
         android:id="@+id/analysis_button_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="625dp"
+        android:layout_marginTop="550dp"
         android:layout_marginLeft="270dp"
         android:text="Analysis"
         />
@@ -30,7 +30,7 @@
         android:id="@+id/home_button_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="625dp"
+        android:layout_marginTop="550dp"
         android:layout_marginLeft="50dp"
         android:text="Home"
         />
