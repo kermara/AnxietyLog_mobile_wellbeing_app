@@ -1,10 +1,19 @@
 package com.example.mobileappgroup8;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
 
 public class ResultActivity extends QuizActivity {
     private TextView resultView;
@@ -24,6 +33,14 @@ public class ResultActivity extends QuizActivity {
         float totalPoints = quizIntent.getFloatExtra("Total points", 0);
         int totalPointsForDisplaying = (int) (totalPoints);
         resultView.setText(Integer.toString(totalPointsForDisplaying));
+
+
+
+
+        /*for(Map.Entry<String, ?> entry : all.entrySet()){
+            tv.setText(entry.getKey() + ": " + entry.getValue().toString());
+        }*/
+
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,5 +68,12 @@ public class ResultActivity extends QuizActivity {
                 overridePendingTransition(R.anim. slide_in_right, R.anim. slide_out_left);
             }
         });
+
+    }
+
+    protected String getDate() {
+        DateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
+        Date currentDate = new Date();
+        return format.format(currentDate);
     }
 }

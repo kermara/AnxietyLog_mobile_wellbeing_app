@@ -2,12 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <CalendarView
-        android:id="@+id/calendar_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
-
     <TextView
         android:id="@+id/history_tv"
         android:layout_width="wrap_content"
@@ -33,6 +27,15 @@
         android:layout_marginTop="550dp"
         android:layout_marginLeft="50dp"
         android:text="Home"
+        />
+
+    <ListView
+        android:id="@+id/lv_history"
+        android:layout_width="250dp"
+        android:layout_height="380dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
+
         />
 
 
