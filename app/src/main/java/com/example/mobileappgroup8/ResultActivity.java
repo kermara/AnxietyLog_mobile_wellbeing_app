@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class ResultActivity extends QuizActivity {
-    private TextView resultView;
+    protected TextView resultView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

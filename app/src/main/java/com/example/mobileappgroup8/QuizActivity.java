@@ -138,7 +138,7 @@ public class QuizActivity extends MainActivity {
     }
 
     protected float pointTotal(int[][] matrix) {
-        float pointsTotal = 0;
+        float pointsTotal = 0f;
         for (int i = 0; i < 7; i++) {
             pointsTotal += matrix[1][i];
         }
