@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent infoActivityIntent = new Intent(MainActivity.this, AnalysisActivity.class);
+                Intent infoActivityIntent = new Intent(MainActivity.this, InfoActivity.class);
                 startActivity(infoActivityIntent);
                 overridePendingTransition(R.anim. slide_in_right, R.anim. slide_out_left);
             }
