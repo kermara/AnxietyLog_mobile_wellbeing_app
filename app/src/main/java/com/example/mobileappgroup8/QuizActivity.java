@@ -123,8 +123,8 @@ public class QuizActivity extends MainActivity {
 
     private void nextQuestion() {
         questionNumber++;
-        if(questionNumber > 1){
-            backButton.setVisibility(View. VISIBLE);
+        if (questionNumber > 1) {
+            backButton.setVisibility(View.VISIBLE);
         }
         startAnimations(true);
         errorView.setText("");
@@ -135,8 +135,8 @@ public class QuizActivity extends MainActivity {
 
     private void previousQuestion() {
         questionNumber--;
-        if(questionNumber == 1){
-            backButton.setVisibility(View. INVISIBLE);
+        if (questionNumber == 1) {
+            backButton.setVisibility(View.INVISIBLE);
         }
         startAnimations(false);
         answeredQuestions[1][(questionNumber - 1)] = 0;

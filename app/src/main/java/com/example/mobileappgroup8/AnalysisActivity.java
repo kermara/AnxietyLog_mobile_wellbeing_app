@@ -8,9 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import static com.example.mobileappgroup8.DatabaseHelper.DB_TABLE;
-import static com.example.mobileappgroup8.DatabaseHelper.KEY_DATE;
 import static com.example.mobileappgroup8.DatabaseHelper.KEY_POINTS;
 
 public class AnalysisActivity extends MainActivity {
