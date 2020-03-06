@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="550dp"
-        android:layout_marginLeft="270dp"
+        android:layout_marginLeft="255dp"
         android:text="Analysis" />
 
     <Button
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="550dp"
-        android:layout_marginLeft="160dp"
+        android:layout_centerHorizontal="true"
         android:text="Clear"
         />
     <Button
@@ -43,6 +43,15 @@
         android:layout_marginLeft="50dp"
         android:text="Home"
         />
+    <TextView
+        android:id="@+id/database_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="500dp"
+        android:textColor="#ff0000"
+        android:textSize="18dp" />
+
 
 
 </RelativeLayout>

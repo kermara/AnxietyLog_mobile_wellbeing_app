@@ -19,7 +19,7 @@ public class ResultActivity extends QuizActivity {
 
         resultView = findViewById(R.id.score_result);
         resultInfo = findViewById(R.id.info_result);
-        resultInfoTwo = findViewById(R.id.info_result2);
+        resultInfoTwo = findViewById(R.id.desc_result);
 
         Button history = findViewById(R.id.history_button_result);
         Button analysis = findViewById(R.id.analysis_button_result);
@@ -37,8 +37,6 @@ public class ResultActivity extends QuizActivity {
         String newEntry = Float.toString(totalPoints);
         if (resultView.length() != 0) {
             AddData(newEntry, getDateObject());
-        } else {
-            Toast.makeText(ResultActivity.this, "Add something, please!", Toast.LENGTH_LONG).show();
         }
 
         history.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +87,7 @@ public class ResultActivity extends QuizActivity {
             whichMode = 2;
         } else if (totalPointsForMode > 9 && totalPointsForMode < 15){
             whichMode = 3;
-        } else if (totalPointsForMode > 15){
+        } else if (totalPointsForMode > 14){
             whichMode = 4;
         }
         switch(whichMode){
