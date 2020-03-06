@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-
-    <CalendarView
-        android:id="@+id/calendar_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/history_tv"
@@ -17,14 +12,20 @@
         android:text="History"
         android:textSize="20dp"/>
 
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="250dp"
+        android:layout_height="380dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"/>
+
     <Button
         android:id="@+id/analysis_button_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="550dp"
         android:layout_marginLeft="270dp"
-        android:text="Analysis"
-        />
+        android:text="Analysis" />
 
     <Button
         android:id="@+id/home_button_history"

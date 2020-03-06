@@ -15,10 +15,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.starting_activity);
 
-        Button startTest = (Button) findViewById(R.id.start_test_button);
-        Button history = (Button) findViewById(R.id.history_button);
-        Button analysis = (Button) findViewById(R.id.analysis_button);
-        Button info = (Button) findViewById(R.id.info_button);
+        Button startTest = findViewById(R.id.start_test_button);
+        Button history = findViewById(R.id.history_button);
+        Button analysis = findViewById(R.id.analysis_button);
+        Button info = findViewById(R.id.info_button);
 
         startTest.setOnClickListener(new View.OnClickListener() {
             @Override
