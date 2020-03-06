@@ -50,6 +50,30 @@ public class HistoryActivity extends MainActivity {
             listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
             pointsListView.setAdapter(listAdapter);
         }
+        if (cursor.getCount() != 0) {
+            clear.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder DatabaseAlert = new AlertDialog.Builder(HistoryActivity.this);
+                    DialogInterface.OnClickListener historyDialog = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int option) {
+                            if (option == -1) {
+                                databaseToDelete.execSQL("delete from " + DB_TABLE);
+                                finish();
+                                overridePendingTransition(0, 0);
+                                startActivity(getIntent());
+                                overridePendingTransition(0, 0);
+                            }
+                        }
+                    };
+                    DatabaseAlert.setMessage("Clear the database?").setPositiveButton("Yes", historyDialog).setNegativeButton("No", historyDialog);
+                    DatabaseAlert.show();
+                }
+            });
+        } else {
+            databaseMessageView.setText("No results saved");
+        }
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,29 +92,5 @@ public class HistoryActivity extends MainActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
-        if (cursor.getCount() != 0) {
-            clear.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AlertDialog.Builder DatabaseAlert = new AlertDialog.Builder(HistoryActivity.this);
-                    DialogInterface.OnClickListener quizDialogListener = new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int option) {
-                            if (option == -1) {
-                                databaseToDelete.execSQL("delete from " + DB_TABLE);
-                                finish();
-                                overridePendingTransition(0, 0);
-                                startActivity(getIntent());
-                                overridePendingTransition(0, 0);
-                            }
-                        }
-                    };
-                    DatabaseAlert.setMessage("Clear the database?").setPositiveButton("Yes", quizDialogListener).setNegativeButton("No", quizDialogListener);
-                    DatabaseAlert.show();
-                }
-            });
-        } else {
-            databaseMessageView.setText("No results saved");
-        }
     }
 }
