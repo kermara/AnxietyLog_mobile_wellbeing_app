@@ -13,14 +13,13 @@
         android:layout_marginTop="160dp"
         android:text="Description of the result"
         android:textSize="18dp" />
-
     <TextView
-        android:id="@+id/desc_result"
+        android:id="@+id/score_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="190dp"
-        android:textSize="15dp" />
+        android:layout_marginTop="100dp"
+        android:textSize="18dp" />
 
 
     <Button
@@ -49,6 +48,14 @@
         android:layout_marginTop="550dp"
         android:text="Analysis"
         android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/result_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="35dp"/>
 
 
 </RelativeLayout>

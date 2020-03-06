@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class ResultActivity extends QuizActivity {
     private DatabaseHelper myDb;
-    private TextView resultView, resultInfo;
+    private TextView resultView, resultInfo, resultInfoTwo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,8 @@ public class ResultActivity extends QuizActivity {
 
         resultView = findViewById(R.id.score_result);
         resultInfo = findViewById(R.id.info_result);
+        resultInfoTwo = findViewById(R.id.result_desc );
+
 
         Button history = findViewById(R.id.history_button_result);
         Button analysis = findViewById(R.id.analysis_button_result);
@@ -97,15 +99,15 @@ public class ResultActivity extends QuizActivity {
                 break;
             case 2:
                 resultInfo.setText("Mild anxiety");
-                //.setText("Monitor");
+                resultInfoTwo.setText("Monitor");
                 break;
             case 3:
                 resultInfo.setText("Moderate anxiety");
-                //setText("Possible clinically significant condition");
+                resultInfoTwo.setText("Possible clinically significant condition");
                 break;
             case 4:
                 resultInfo.setText("Severe anxiety");
-                //setText("Active treatment probably warranted");
+                resultInfoTwo.setText("Active treatment probably warranted");
                 break;
         }
     }
