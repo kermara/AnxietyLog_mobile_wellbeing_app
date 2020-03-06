@@ -52,8 +52,9 @@ public class AnalysisActivity extends MainActivity {
             String average = "SELECT AVG(" + KEY_POINTS + ") FROM " + DB_TABLE;
             Cursor cursorAvg = database.rawQuery(average, null);
             cursorAvg.moveToFirst();
-            float averagePoints = Math.round(Float.valueOf(cursorAvg.getString(0)) * 100) / 100.0f;
-            averageTv.setText(cursorAvg.getString(0));
+            String averagePointsString = String.format("%.2f", Float.valueOf(cursorAvg.getString(0)));
+            Float averagePoints = Float.valueOf(averagePointsString);
+            averageTv.setText(averagePointsString);
 
             if (averagePoints <= 4) {
                 avgDescTv.setText("No anxiety");

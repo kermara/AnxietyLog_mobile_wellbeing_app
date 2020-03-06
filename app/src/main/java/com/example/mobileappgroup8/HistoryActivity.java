@@ -79,7 +79,9 @@ public class HistoryActivity extends MainActivity {
                             if (option == -1) {
                                 databaseToDelete.execSQL("delete from " + DB_TABLE);
                                 finish();
+                                overridePendingTransition(0, 0);
                                 startActivity(getIntent());
+                                overridePendingTransition(0, 0);
                             }
                         }
                     };
