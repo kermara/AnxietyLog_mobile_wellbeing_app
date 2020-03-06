@@ -2,52 +2,60 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    >
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/score_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
         android:layout_marginLeft="35dp"
-
-
-        android:text="You got x points" />
+        android:layout_marginTop="100dp"
+        android:text="You got x points"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/info_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
         android:layout_marginLeft="35dp"
+        android:layout_marginTop="160dp"
+        android:text="Description of the result"
+        android:textSize="18dp" />
 
-        android:text="Description of the result" />
+    <TextView
+        android:id="@+id/desc_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="190dp"
+        android:textSize="15dp" />
 
     <Button
         android:id="@+id/home_button_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="625dp"
         android:layout_marginLeft="30dp"
-        android:text="Home" />
+        android:layout_marginTop="550dp"
+        android:text="Home"
+        android:textSize="16dp" />
 
     <Button
         android:id="@+id/history_button_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="625dp"
         android:layout_marginLeft="140dp"
-        android:text="History" />
+        android:layout_marginTop="550dp"
+        android:text="History"
+        android:textSize="16dp" />
 
     <Button
         android:id="@+id/analysis_button_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="625dp"
         android:layout_marginLeft="250dp"
-        android:text="History" />
-
+        android:layout_marginTop="550dp"
+        android:text="Analysis"
+        android:textSize="16dp" />
 
 
 </RelativeLayout>

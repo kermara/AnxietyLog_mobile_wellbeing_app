@@ -1,5 +1,6 @@
 package com.example.mobileappgroup8;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,17 +11,19 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 public class QuizActivity extends MainActivity {
 
-    protected String[] questions = {"Feeling nervous, anxious or on edge?", "Not being able to stop or control worrying?", "Worrying too much about different things?", "Trouble relaxing?",
+    private String[] questions = {"Feeling nervous, anxious or on edge?", "Not being able to stop or control worrying?", "Worrying too much about different things?", "Trouble relaxing?",
             "Being so restless that it is hard to sit still?", "Becoming easily annoyed or irritable?", "Feeling afraid as if something awful might happen?"};
-    protected int[][] answeredQuestions = new int[2][7];
-    protected int questionNumber = 1;
-    protected RadioButton rb1, rb2, rb3, rb4;
-    protected RadioGroup rg1;
-    protected TextView questionTV, errorView, questionNumberView;
-    protected Button nextButton, backButton;
-    protected Animation slideIn, slideOut, slideInBackwards, slideOutBackwards;
+    private int[][] answeredQuestions = new int[2][7];
+    private int questionNumber = 1;
+    private RadioButton rb1, rb2, rb3, rb4;
+    private RadioGroup rg1;
+    private TextView questionTV, errorView, questionNumberView;
+    private Button nextButton, backButton, homeButton;
+    private Animation slideIn, slideOut, slideInBackwards, slideOutBackwards, rgSlideIn, rgSlideOut, rgSlideInBackwards, rgSlideOutBackwards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +40,16 @@ public class QuizActivity extends MainActivity {
         questionNumberView = findViewById(R.id.text_view_question_number);
         nextButton = findViewById(R.id.next_button);
         backButton = findViewById(R.id.back_button);
+        homeButton = findViewById(R.id.home_button_quiz);
 
         slideIn = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
         slideOut = AnimationUtils.loadAnimation(this, R.anim.slide_out_left);
         slideInBackwards = AnimationUtils.loadAnimation(this, R.anim.slide_in_left);
         slideOutBackwards = AnimationUtils.loadAnimation(this, R.anim.slide_out_right);
+        rgSlideIn = AnimationUtils.loadAnimation(this, R.anim.rg_slide_in_right);
+        rgSlideOut = AnimationUtils.loadAnimation(this, R.anim.rg_slide_out_left);
+        rgSlideInBackwards = AnimationUtils.loadAnimation(this, R.anim.rg_slide_in_left);
+        rgSlideOutBackwards = AnimationUtils.loadAnimation(this, R.anim.rg_slide_out_right);
 
         questionTV.setText(questions[(questionNumber - 1)]);
         questionNumberView.setText("Question " + questionNumber + "/7");
@@ -78,9 +86,7 @@ public class QuizActivity extends MainActivity {
                         finish();
                         return;
                     } else {
-
                         nextQuestion();
-
                     }
                 }
             }
@@ -90,37 +96,57 @@ public class QuizActivity extends MainActivity {
             public void onClick(View v) {
                 if (questionNumber > 1) {
                     previousQuestion();
+                    if (questionNumber != 1) {
+                        backButton.setVisibility(View.VISIBLE);
+                    }
                 }
+            }
+        });
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder quizAlert = new AlertDialog.Builder(QuizActivity.this);
+                DialogInterface.OnClickListener quizDialogListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int option) {
+                        if (option == -1) {
+                            Intent nextActivity = new Intent(QuizActivity.this, MainActivity.class);
+                            startActivity(nextActivity);
+                        }
+                    }
+                };
+                quizAlert.setMessage("Exit the test?").setPositiveButton("Yes", quizDialogListener).setNegativeButton("No", quizDialogListener);
+                quizAlert.show();
             }
         });
     }
 
-    protected void nextQuestion() {
+    private void nextQuestion() {
         questionNumber++;
+        if (questionNumber > 1) {
+            backButton.setVisibility(View.VISIBLE);
+        }
+        startAnimations(true);
         errorView.setText("");
         questionTV.setText(questions[(questionNumber - 1)]);
         questionNumberView.setText("Question " + questionNumber + "/7");
-        rg1.startAnimation(slideOut);
-        questionTV.startAnimation(slideOut);
-        rg1.startAnimation(slideIn);
-        questionTV.startAnimation(slideIn);
         rg1.clearCheck();
     }
 
-    protected void previousQuestion() {
+    private void previousQuestion() {
         questionNumber--;
+        if (questionNumber == 1) {
+            backButton.setVisibility(View.INVISIBLE);
+        }
+        startAnimations(false);
         answeredQuestions[1][(questionNumber - 1)] = 0;
         errorView.setText("");
         questionTV.setText(questions[(questionNumber - 1)]);
         questionNumberView.setText("Question " + questionNumber + "/7");
-        rg1.startAnimation(slideOutBackwards);
-        questionTV.startAnimation(slideOutBackwards);
-        rg1.startAnimation(slideInBackwards);
-        questionTV.startAnimation(slideInBackwards);
         rg1.clearCheck();
     }
 
-    protected int whichRadioButtonIsTicked() {
+    private int whichRadioButtonIsTicked() {
         int buttonSelection = 1;
         if (rb2.isChecked() == true) {
             buttonSelection = 2;
@@ -132,11 +158,25 @@ public class QuizActivity extends MainActivity {
         return buttonSelection;
     }
 
-    protected int pointTotal(int[][] matrix) {
-        int pointsTotal = 0;
+    private float pointTotal(int[][] matrix) {
+        float pointsTotal = 0f;
         for (int i = 0; i < 7; i++) {
             pointsTotal += matrix[1][i];
         }
         return pointsTotal;
+    }
+
+    private void startAnimations(boolean nextQuestion) {
+        if (nextQuestion == true) {
+            questionTV.startAnimation(slideOut);
+            questionTV.startAnimation(slideIn);
+            rg1.startAnimation(rgSlideOut);
+            rg1.startAnimation(rgSlideIn);
+        } else {
+            questionTV.startAnimation(slideOutBackwards);
+            questionTV.startAnimation(slideInBackwards);
+            rg1.startAnimation(rgSlideOutBackwards);
+            rg1.startAnimation(rgSlideInBackwards);
+        }
     }
 }
