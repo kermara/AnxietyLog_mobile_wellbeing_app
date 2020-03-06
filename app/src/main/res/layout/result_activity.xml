@@ -4,14 +4,6 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/score_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="100dp"
-        android:text="You got x points"
-        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/info_result"
@@ -23,12 +15,13 @@
         android:textSize="18dp" />
 
     <TextView
-        android:id="@+id/info_result2"
+        android:id="@+id/desc_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"
         android:layout_marginTop="190dp"
         android:textSize="15dp" />
+
 
     <Button
         android:id="@+id/home_button_result"
