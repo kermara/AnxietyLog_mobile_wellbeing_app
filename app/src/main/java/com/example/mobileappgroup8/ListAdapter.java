@@ -19,7 +19,7 @@ import java.util.Date;
 public class ListAdapter extends ArrayAdapter<Points> {
     private static final String TAG = "ListAdapter";
     private Context mContext;
-    int mResource;
+    private int mResource;
 
     public ListAdapter(@NonNull Context context, int resource, ArrayList<Points> objects) {
         super(context, resource, objects);
@@ -28,7 +28,6 @@ public class ListAdapter extends ArrayAdapter<Points> {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        String points = getItem(position).getPoints();
         Date date = getItem(position).getDate();
 
         LayoutInflater inflater = LayoutInflater.from(mContext);

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class HistoryActivity extends MainActivity {
 
-    protected DatabaseHelper db;
+    private DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class HistoryActivity extends MainActivity {
             while (cursor.moveToNext()) {
                 list.add(cursor.getString(1));
                 list.add(cursor.getString(2));
-                ListAdapter listAdapter = new ArrayAdapter<>(this, R.layout. adapterview_activity, list);
+                ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
                 listView.setAdapter(listAdapter);
             }
         }
@@ -45,6 +45,7 @@ public class HistoryActivity extends MainActivity {
             public void onClick(View v) {
                 Intent homeActivityIntent = new Intent(HistoryActivity.this, MainActivity.class);
                 startActivity(homeActivityIntent);
+                overridePendingTransition(R.anim. slide_in_right, R.anim. slide_out_left);
             }
         });
 
@@ -53,6 +54,7 @@ public class HistoryActivity extends MainActivity {
             public void onClick(View v) {
                 Intent analysisActivityIntent = new Intent(HistoryActivity.this, AnalysisActivity.class);
                 startActivity(analysisActivityIntent);
+                overridePendingTransition(R.anim. slide_in_right, R.anim. slide_out_left);
             }
         });
     }

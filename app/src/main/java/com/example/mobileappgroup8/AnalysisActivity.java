@@ -1,5 +1,6 @@
 package com.example.mobileappgroup8;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 public class AnalysisActivity extends MainActivity {
