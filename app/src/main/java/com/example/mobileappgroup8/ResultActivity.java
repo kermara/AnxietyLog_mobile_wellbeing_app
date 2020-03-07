@@ -31,13 +31,18 @@ public class ResultActivity extends QuizActivity {
         float totalPoints = quizIntent.getFloatExtra("Total points", 0);
         int totalPointsInt = (int) (totalPoints);
         resultView.setText("You got " + totalPointsInt + " points");
+        
 
         whichAnxietyLevel(totalPointsInt);
-
+        
+        collectData();
+        
+        /*
         String newEntry = Float.toString(totalPoints);
         if (resultView.length() != 0) {
             AddData(newEntry, getDateObject());
         }
+        */
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,11 +71,30 @@ public class ResultActivity extends QuizActivity {
             }
         });
     }
-
+    /*
     private Date getDateObject() {
         Date currentDate = new Date();
         return currentDate;
     }
+    */
+    
+    public void collectData() {
+
+        //String newPoints = resultView.getText().toString();
+        String newPoints = Float.toString(totalPoints);
+
+        @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Date currentDate = new Date();
+        String newDate = format.format(currentDate);
+
+        String newResult = "testing testing";
+
+        if (resultView.length() != 0) {
+            AddData(newPoints, newDate, newResult);
+        }
+
+    }
+
 
     private void AddData(String newEntry, Date newDate) {
         boolean insertData = myDb.insertData(newEntry, newDate);
