@@ -17,25 +17,41 @@ import java.util.Date;
 
 
 public class ListAdapter extends ArrayAdapter<Points> {
-    private static final String TAG = "ListAdapter";
-    private Context mContext;
-    private int mResource;
+  private LayoutInflater mInflater;
+    private ArrayList<Points> pointList;
+    private int mViewResourceId;
 
-    public ListAdapter(@NonNull Context context, int resource, ArrayList<Points> objects) {
-        super(context, resource, objects);
-        mContext = context;
-        mResource = resource;
+
+    public ListAdapter(@NonNull Context context, int textviewResourceId, ArrayList<Points> pointList) {
+        super(context, textviewResourceId, pointList);
+        this.pointList = pointList;
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mViewResourceId = textviewResourceId;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
-        Date date = getItem(position).getDate();
+    public View getView(int position, View convertView, ViewGroup parent){
 
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        convertView = inflater.inflate(mResource, parent, false);
+        convertView = mInflater.inflate(mViewResourceId,null);
 
-        TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
-        tvDate.setText(date.toString());
+        Points points = pointList.get(position);
 
+        if (points != null){
+            TextView tvPoints = (TextView) convertView.findViewById(R.id.tvPoints);
+            TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
+            TextView tvResult = (TextView) convertView.findViewById(R.id.tvResult);
+
+            if (tvPoints != null){
+                tvPoints.setText(points.getPoints());
+            }
+
+            if(tvDate != null){
+                tvDate.setText(points.getDate());
+            }
+            
+             if(tvResult != null){
+                tvDate.setText(points.getResult());
+            }
+        }
         return convertView;
     }
 }
