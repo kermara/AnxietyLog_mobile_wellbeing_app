@@ -25,7 +25,7 @@ public class HistoryActivity extends MainActivity {
     private SQLiteDatabase databaseToDelete;
     */
     private ListView pointsListView;
-    private Button home, analysis, clear;
+    private Button home, analysis, delete;
     private TextView databaseMessageView;
     private ListAdapter listAdapter;
 
@@ -36,7 +36,7 @@ public class HistoryActivity extends MainActivity {
 
         home = findViewById(R.id.home_button_history);
         analysis = findViewById(R.id.analysis_button_history);
-        clear = findViewById(R.id.clear_button);
+        delete = findViewById(R.id.delete_button_history);
         pointsListView = findViewById(R.id.listView);
         databaseMessageView = findViewById(R.id.database_view);
 
@@ -58,7 +58,7 @@ public class HistoryActivity extends MainActivity {
                 listView.setAdapter(listAdapter);
         }
         if (cursor.getCount() != 0) {
-            clear.setOnClickListener(new View.OnClickListener() {
+            delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder DatabaseAlert = new AlertDialog.Builder(HistoryActivity.this);
