@@ -25,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //columns
 
-   public static final String KEY_ID = "id";
+    public static final String KEY_ID = "id";
     public static final String KEY_POINTS = "points";
     public static final String KEY_DATE = "date";
     public static final String KEY_RESULT = "result";
@@ -54,7 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //add content
 
-   public boolean insertData(String points, String date, String result) {
+    public boolean insertData(String points, String date, String result) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_POINTS, points);
@@ -76,8 +76,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + DB_TABLE, null);
         return cursor;
     }
-    
-       //delete content
+
+    //delete content
 
     public void deleteAll() {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -95,4 +95,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db;
     }
 }
+
 
