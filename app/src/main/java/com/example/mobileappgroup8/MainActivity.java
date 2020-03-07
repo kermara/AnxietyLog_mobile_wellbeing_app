@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent quizActivityIntent = new Intent(MainActivity.this, QuizActivity.class);
                 startActivity(quizActivityIntent);
-                overridePendingTransition(R.anim. slide_in_right, R.anim. slide_out_left);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent historyActivityIntent = new Intent(MainActivity.this, HistoryActivity.class);
                 startActivity(historyActivityIntent);
-                overridePendingTransition(R.anim. slide_in_right, R.anim. slide_out_left);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent analysisActivityIntent = new Intent(MainActivity.this, AnalysisActivity.class);
                 startActivity(analysisActivityIntent);
-                overridePendingTransition(R.anim. slide_in_right, R.anim. slide_out_left);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent infoActivityIntent = new Intent(MainActivity.this, InfoActivity.class);
                 startActivity(infoActivityIntent);
-                overridePendingTransition(R.anim. slide_in_right, R.anim. slide_out_left);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }

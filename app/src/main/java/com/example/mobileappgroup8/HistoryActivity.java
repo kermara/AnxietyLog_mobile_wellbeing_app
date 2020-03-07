@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -24,11 +23,11 @@ public class HistoryActivity extends MainActivity {
     private DatabaseHelper db;
     private SQLiteDatabase databaseToDelete;
     private ListView pointsListView;
-    private Button home, analysis, clear;
+    private Button home, analysis, delete;
     private TextView databaseMessageView;
     private ListAdapter listAdapter;
     private Points points;
-    List<Points> pointsList;
+    private List<Points> pointsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +36,8 @@ public class HistoryActivity extends MainActivity {
 
         home = findViewById(R.id.home_button_history);
         analysis = findViewById(R.id.analysis_button_history);
-        clear = findViewById(R.id.clear_button);
-        pointsListView = findViewById(R.id.listView);
+        delete = findViewById(R.id.delete_button_history);
+        pointsListView = findViewById(R.id.listView_history);
         databaseMessageView = findViewById(R.id.database_view);
         pointsListView = findViewById(R.id.listView_history);
 
@@ -58,12 +57,11 @@ public class HistoryActivity extends MainActivity {
         while (cursor.moveToNext()) {
             points = new Points(cursor.getString(1), cursor.getString(2), cursor.getString(3));
             pointsList.add(points);
-            //ListAdapter listAdapter = new ListAdapter(this, activity_adapterview, (ArrayList<Points>) pointsList);
-            ListAdapter listAdapter = new com.example.mobileappgroup8.ListAdapter(this,R.id.adapterview_activity, (ArrayList<Points>) pointsList);
+            ListAdapter listAdapter = new com.example.mobileappgroup8.ListAdapter(this, R.layout.adapterview_activity, (ArrayList<Points>) pointsList);
             pointsListView.setAdapter(listAdapter);
         }
         if (cursor.getCount() != 0) {
-            clear.setOnClickListener(new View.OnClickListener() {
+            delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder DatabaseAlert = new AlertDialog.Builder(HistoryActivity.this);
