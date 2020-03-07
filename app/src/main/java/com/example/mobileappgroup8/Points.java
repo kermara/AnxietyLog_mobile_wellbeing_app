@@ -25,7 +25,10 @@ public class Points {
         return date;
     }
 
-    public String getResult() {return result;}
+    public String getResult() {
+        return result;
+        
+    }
 
     @NonNull
     @Override
