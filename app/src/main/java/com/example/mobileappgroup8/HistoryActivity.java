@@ -11,8 +11,12 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
+
 import java.util.ArrayList;
+import java.util.List;
+
 import static com.example.mobileappgroup8.DatabaseHelper.DB_TABLE;
 
 public class HistoryActivity extends MainActivity {
@@ -23,6 +27,8 @@ public class HistoryActivity extends MainActivity {
     private Button home, analysis, clear;
     private TextView databaseMessageView;
     private ListAdapter listAdapter;
+    private Points points;
+    List<Points> pointsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +40,26 @@ public class HistoryActivity extends MainActivity {
         clear = findViewById(R.id.clear_button);
         pointsListView = findViewById(R.id.listView);
         databaseMessageView = findViewById(R.id.database_view);
+        pointsListView = findViewById(R.id.listView_history);
 
         db = new DatabaseHelper(this);
         databaseToDelete = db.getWritableDatabase();
 
-        ArrayList<String> list = new ArrayList<>();
+        //ArrayList<String> list = new ArrayList<>();
+        pointsList = new ArrayList<>();
         final Cursor cursor = db.viewData();
 
-        while (cursor.moveToNext()) {
+        /*while (cursor.moveToNext()) {
             list.add(cursor.getString(1));
             list.add(cursor.getString(2));
             listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+            pointsListView.setAdapter(listAdapter);
+        }*/
+        while (cursor.moveToNext()) {
+            points = new Points(cursor.getString(1), cursor.getString(2), cursor.getString(3));
+            pointsList.add(points);
+            //ListAdapter listAdapter = new ListAdapter(this, activity_adapterview, (ArrayList<Points>) pointsList);
+            ListAdapter listAdapter = new com.example.mobileappgroup8.ListAdapter(this,R.id.adapterview_activity, (ArrayList<Points>) pointsList);
             pointsListView.setAdapter(listAdapter);
         }
         if (cursor.getCount() != 0) {

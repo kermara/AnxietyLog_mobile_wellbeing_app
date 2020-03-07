@@ -25,9 +25,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //columns
 
-    public static final String KEY_ID = "id";
+   public static final String KEY_ID = "id";
     public static final String KEY_POINTS = "points";
     public static final String KEY_DATE = "date";
+    public static final String KEY_RESULT = "result";
+
 
 
     public DatabaseHelper(Context context) {
@@ -39,7 +41,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String CREATE_TABLE = "CREATE TABLE " + DB_TABLE + "(" +
                 KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 KEY_POINTS + " TEXT," +
-                KEY_DATE + " DATE NOT NULL, ''" + ")";
+                KEY_DATE + " DATE NOT NULL, " +
+                KEY_RESULT + " TEXT,''" +  ")";
         db.execSQL(CREATE_TABLE);
     }
 
@@ -51,15 +54,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //add content
 
-    public boolean insertData(String points, Date date) {
+   public boolean insertData(String points, String date, String result) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_POINTS, points);
-        contentValues.put(KEY_DATE, date.toString());
+        contentValues.put(KEY_DATE, date);
+        contentValues.put(KEY_RESULT, result);
 
-        long result = db.insert(DB_TABLE, null, contentValues);
+        long result_insert = db.insert(DB_TABLE, null, contentValues);
 
-        if (result == -1) {
+        if (result_insert == -1) {
             return false;
         }
         return true;
@@ -71,6 +75,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + DB_TABLE, null);
         return cursor;
+    }
+    
+       //delete content
+
+    public void deleteAll() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from " + DB_TABLE);
+        db.close();
     }
 
     public int deleteData(int id) {
