@@ -86,7 +86,7 @@ public class ResultActivity extends QuizActivity {
     */
 
     private void collectData() {
-        String newPoints = resultView.getText().toString();
+        String newPoints = Float.toString(totalPoints);
         @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date currentDate = new Date();
         String newDate = format.format(currentDate);
