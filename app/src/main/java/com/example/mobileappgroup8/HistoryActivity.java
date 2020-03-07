@@ -11,11 +11,8 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AlertDialog;
-
 import java.util.ArrayList;
-
 import static com.example.mobileappgroup8.DatabaseHelper.DB_TABLE;
 
 public class HistoryActivity extends MainActivity {
