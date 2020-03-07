@@ -3,20 +3,23 @@ package com.example.mobileappgroup8;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.mobileappgroup8.DatabaseHelper.DB_TABLE;
+import static com.example.mobileappgroup8.R.layout.activity_adapterview;
 
 public class HistoryActivity extends MainActivity {
 
@@ -24,10 +27,13 @@ public class HistoryActivity extends MainActivity {
     /*
     private SQLiteDatabase databaseToDelete;
     */
-    private ListView pointsListView;
+    List<Points> pointsList;
+    private ListView listView;
+
     private Button home, analysis, delete;
     private TextView databaseMessageView;
-    private ListAdapter listAdapter;
+    private Points points;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,70 +43,72 @@ public class HistoryActivity extends MainActivity {
         home = findViewById(R.id.home_button_history);
         analysis = findViewById(R.id.analysis_button_history);
         delete = findViewById(R.id.delete_button_history);
-        pointsListView = findViewById(R.id.listView);
-        databaseMessageView = findViewById(R.id.database_view);
+        //databaseMessageView = findViewById(R.id.database_view);
 
         db = new DatabaseHelper(this);
-        databaseToDelete = db.getWritableDatabase();
+        //databaseToDelete = db.getWritableDatabase();
 
         pointsList = new ArrayList<>();
         Cursor cursor = db.viewData();
-        
-        if(cursor.getCount() == 0){
-                Toast.makeText(HistoryActivity.this,"Database is empty", Toast.LENGTH_SHORT).show();
-            } else {
 
-      while(cursor.moveToNext()){
-                points = new Points(cursor.getString(1), cursor.getString(2),cursor.getString(3));
+        if (cursor.getCount() == 0) {
+            Toast.makeText(HistoryActivity.this, "Database is empty", Toast.LENGTH_SHORT).show();
+        } else {
+
+            while (cursor.moveToNext()) {
+                points = new Points(cursor.getString(1), cursor.getString(2), cursor.getString(3));
                 pointsList.add(points);
-                ListAdapter listAdapter = new ListAdapter(this, R.layout.activity_adapterview, (ArrayList<Points>) pointsList);
+                //ListAdapter listAdapter = new ListAdapter(this, activity_adapterview, (ArrayList<Points>) pointsList);
+                ListAdapter listAdapter = new com.example.mobileappgroup8.ListAdapter(this,R.id.adapterview_activity, (ArrayList<Points>) pointsList);
                 listView = (ListView) findViewById(R.id.listView_history);
                 listView.setAdapter(listAdapter);
-        }
-        if (cursor.getCount() != 0) {
-            delete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AlertDialog.Builder DatabaseAlert = new AlertDialog.Builder(HistoryActivity.this);
-                    DialogInterface.OnClickListener historyDialog = new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int option) {
-                            if (option == -1) {
+            }
+            if (cursor.getCount() != 0) {
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder DatabaseAlert = new AlertDialog.Builder(HistoryActivity.this);
+                        DialogInterface.OnClickListener historyDialog = new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int option) {
+                                if (option == -1) {
                                 /*
                                 databaseToDelete.execSQL("delete from " + DB_TABLE);
                                 */
-                                db.deleteAll();
-                                finish();
-                                overridePendingTransition(0, 0);
-                                startActivity(getIntent());
-                                overridePendingTransition(0, 0);
+                                    db.deleteAll();
+                                    finish();
+                                    overridePendingTransition(0, 0);
+                                    startActivity(getIntent());
+                                    overridePendingTransition(0, 0);
+                                }
                             }
-                        }
-                    };
-                    DatabaseAlert.setMessage("Clear the database?").setPositiveButton("Yes", historyDialog).setNegativeButton("No", historyDialog);
-                    DatabaseAlert.show();
+                        };
+                        DatabaseAlert.setMessage("Clear the database?").setPositiveButton("Yes", historyDialog).setNegativeButton("No", historyDialog);
+                        DatabaseAlert.show();
+                    }
+                });
+            } else {
+                databaseMessageView.setText("No results saved");
+            }
+
+            home.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent homeActivityIntent = new Intent(HistoryActivity.this, MainActivity.class);
+                    startActivity(homeActivityIntent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
             });
-        } else {
-            databaseMessageView.setText("No results saved");
+
+            analysis.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent analysisActivityIntent = new Intent(HistoryActivity.this, AnalysisActivity.class);
+                    startActivity(analysisActivityIntent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+            });
         }
-
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent homeActivityIntent = new Intent(HistoryActivity.this, MainActivity.class);
-                startActivity(homeActivityIntent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
-
-        analysis.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent analysisActivityIntent = new Intent(HistoryActivity.this, AnalysisActivity.class);
-                startActivity(analysisActivityIntent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
     }
 }
+
