@@ -21,7 +21,9 @@ import static com.example.mobileappgroup8.DatabaseHelper.DB_TABLE;
 public class HistoryActivity extends MainActivity {
 
     private DatabaseHelper db;
+    /*
     private SQLiteDatabase databaseToDelete;
+    */
     private ListView pointsListView;
     private Button home, analysis, clear;
     private TextView databaseMessageView;
@@ -41,14 +43,19 @@ public class HistoryActivity extends MainActivity {
         db = new DatabaseHelper(this);
         databaseToDelete = db.getWritableDatabase();
 
-        ArrayList<String> list = new ArrayList<>();
-        final Cursor cursor = db.viewData();
+        pointsList = new ArrayList<>();
+        Cursor cursor = db.viewData();
+        
+        if(cursor.getCount() == 0){
+                Toast.makeText(HistoryActivity.this,"Database is empty", Toast.LENGTH_SHORT).show();
+            } else {
 
-        while (cursor.moveToNext()) {
-            list.add(cursor.getString(1));
-            list.add(cursor.getString(2));
-            listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
-            pointsListView.setAdapter(listAdapter);
+      while(cursor.moveToNext()){
+                points = new Points(cursor.getString(1), cursor.getString(2),cursor.getString(3));
+                pointsList.add(points);
+                ListAdapter listAdapter = new ListAdapter(this, R.layout.activity_adapterview, (ArrayList<Points>) pointsList);
+                listView = (ListView) findViewById(R.id.listView_history);
+                listView.setAdapter(listAdapter);
         }
         if (cursor.getCount() != 0) {
             clear.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +66,10 @@ public class HistoryActivity extends MainActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int option) {
                             if (option == -1) {
+                                /*
                                 databaseToDelete.execSQL("delete from " + DB_TABLE);
+                                */
+                                db.deleteAll();
                                 finish();
                                 overridePendingTransition(0, 0);
                                 startActivity(getIntent());
