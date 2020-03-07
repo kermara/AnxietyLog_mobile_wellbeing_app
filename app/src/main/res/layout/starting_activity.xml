@@ -7,16 +7,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="50dp"
         android:text="Anxiety Test"
-        android:textSize="38sp" />
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/start_test_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
+        android:layout_centerVertical="true"
         android:minWidth="150dp"
         android:padding="16dp"
         android:text="Start Test"
@@ -26,8 +26,8 @@
         android:id="@+id/info_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="550dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignBottom="@id/history_button"
         android:minWidth="100dp"
         android:text="Info"
         android:textSize="16dp" />
@@ -36,8 +36,9 @@
         android:id="@+id/history_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="550dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="200dp"
+        android:layout_below="@id/start_test_button"
         android:minWidth="100dp"
         android:text="History"
         android:textSize="16dp" />
@@ -46,20 +47,11 @@
         android:id="@+id/analysis_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="550dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@id/history_button"
         android:minWidth="100dp"
         android:text="Analysis"
         android:textSize="16dp" />
-
-    <TextView
-        android:id="@+id/email_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="350dp"
-        android:textColor="#ff0000"
-        android:textSize="18sp" />
 
 
 </RelativeLayout>
