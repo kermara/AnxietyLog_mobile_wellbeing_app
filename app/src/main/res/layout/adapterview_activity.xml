@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/tvPoints"
-        android:layout_width="match_parent"
+        android:layout_width="394dp"
         android:layout_height="match_parent"
         android:layout_weight="45"
         android:gravity="center"
@@ -15,19 +15,19 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tvDate"
+        android:id="@+id/tvResult"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="35"
         android:gravity="start"
-        android:text="Date" />
+        android:text="Result" />
 
     <TextView
-        android:id="@+id/tvResult"
+        android:id="@+id/tvDate"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="20"
         android:gravity="start"
-        android:text="result" />
+        android:text="Date" />
 
 </LinearLayout>

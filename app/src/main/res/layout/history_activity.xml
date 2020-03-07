@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:id="@+id/history_tv"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="45dp"
         android:text="History"
         android:textSize="20dp" />
 
@@ -24,9 +24,10 @@
 
     <ListView
         android:id="@+id/listView_history"
-        android:layout_width="234dp"
-        android:layout_height="415dp"
-        android:layout_centerInParent="true" />
+        android:layout_width="276dp"
+        android:layout_height="441dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"/>
     <Button
         android:id="@+id/delete_button_history"
         android:layout_width="wrap_content"

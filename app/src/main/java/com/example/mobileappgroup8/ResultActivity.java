@@ -72,13 +72,13 @@ public class ResultActivity extends QuizActivity {
         });
     }
 
-    private void collectData() {
+    protected void collectData() {
         String newPoints = Float.toString(totalPoints);
         @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date currentDate = new Date();
         String newDate = format.format(currentDate);
 
-        String newResult = "testing testing";
+        String newResult = "";
 
         if (resultView.length() != 0) {
             AddData(newPoints, newDate, newResult);
@@ -87,7 +87,7 @@ public class ResultActivity extends QuizActivity {
     }
 
 
-    private void AddData(String newPoints, String newDate, String newResult) {
+    protected void AddData(String newPoints, String newDate, String newResult) {
         boolean insertData = myDb.insertData(newPoints, newDate, newResult);
         if (insertData == true) {
             Toast.makeText(this, "Points added to history", Toast.LENGTH_LONG).show();

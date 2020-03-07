@@ -51,7 +51,7 @@ public class ListAdapter extends ArrayAdapter<Points> {
             }
 
             if (tvResult != null) {
-                tvDate.setText(points.getResult());
+                tvResult.setText(points.getResult());
             }
         }
         return convertView;
