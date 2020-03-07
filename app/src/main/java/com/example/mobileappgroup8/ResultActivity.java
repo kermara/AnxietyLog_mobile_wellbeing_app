@@ -1,11 +1,16 @@
 package com.example.mobileappgroup8;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ResultActivity extends QuizActivity {
@@ -80,9 +85,7 @@ public class ResultActivity extends QuizActivity {
     
     public void collectData() {
 
-        //String newPoints = resultView.getText().toString();
-        String newPoints = Float.toString(totalPoints);
-
+        String newPoints = resultView.getText().toString();
         @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date currentDate = new Date();
         String newDate = format.format(currentDate);
@@ -96,12 +99,13 @@ public class ResultActivity extends QuizActivity {
     }
 
 
-    private void AddData(String newEntry, Date newDate) {
-        boolean insertData = myDb.insertData(newEntry, newDate);
+    public void AddData(String newPoints, String newDate, String newResult) {
+        boolean insertData = myDb.insertData(newPoints, newDate, newResult);
         if (insertData == true) {
-            Toast.makeText(this, "Points stored", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Points added to history", Toast.LENGTH_LONG).show();
+            Log.d("addData", "on tallentanut");
         } else {
-            Toast.makeText(this, "Points not stored", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Points not added", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -133,3 +137,4 @@ public class ResultActivity extends QuizActivity {
         }
     }
 }
+
