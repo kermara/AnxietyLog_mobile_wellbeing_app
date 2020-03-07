@@ -6,10 +6,8 @@ import java.util.Date;
 
 public class Points {
 
+ 
     private String points;
-    private Date date;
-
-    pprivate String points;
     private String date;
     private String result;
 
