@@ -1,57 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="14dp">
 
     <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:id="@+id/history_tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:text="History"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/home_button_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignBaseline="@id/delete_button_history"
+        android:text="Home"
+        android:textSize="16dp"/>
+
+    <ListView
+        android:id="@+id/listView_history"
+        android:layout_width="276dp"
+        android:layout_height="441dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"/>
+    <Button
+        android:id="@+id/delete_button_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="History"
-        android:textSize="20dp"/>
+        android:layout_below="@id/database_view"
+        android:layout_marginTop="225dp"
+        android:text="Delete"
+        android:textSize="16dp"/>
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="250dp"
-        android:layout_height="380dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="130dp"/>
 
     <Button
         android:id="@+id/analysis_button_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="550dp"
-        android:layout_marginLeft="255dp"
-        android:text="Analysis" />
+        android:layout_alignBaseline="@id/delete_button_history"
+        android:layout_alignParentRight="true"
+        android:text="Analysis"
+        android:textSize="16dp"/>
 
-    <Button
-        android:id="@+id/clear_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="550dp"
-        android:layout_centerHorizontal="true"
-        android:text="Clear"
-        />
-    <Button
-        android:id="@+id/home_button_history"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="550dp"
-        android:layout_marginLeft="50dp"
-        android:text="Home"
-        />
     <TextView
         android:id="@+id/database_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="500dp"
+        android:layout_centerInParent="true"
         android:textColor="#ff0000"
-        android:textSize="18dp" />
-
+        android:textSize="16dp" />
 
 
 </RelativeLayout>

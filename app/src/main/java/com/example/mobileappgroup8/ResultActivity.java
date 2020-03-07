@@ -1,16 +1,23 @@
 package com.example.mobileappgroup8;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ResultActivity extends QuizActivity {
     private DatabaseHelper myDb;
     private TextView resultView, resultInfo, resultInfoTwo;
+    private float totalPoints;
+    private int totalPointsInt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +35,14 @@ public class ResultActivity extends QuizActivity {
         myDb = new DatabaseHelper(this);
 
         Intent quizIntent = getIntent();
-        float totalPoints = quizIntent.getFloatExtra("Total points", 0);
-        int totalPointsInt = (int) (totalPoints);
+        totalPoints = quizIntent.getFloatExtra("Total points", 0);
+        totalPointsInt = (int) (totalPoints);
         resultView.setText("You got " + totalPointsInt + " points");
+
 
         whichAnxietyLevel(totalPointsInt);
 
-        String newEntry = Float.toString(totalPoints);
-        if (resultView.length() != 0) {
-            AddData(newEntry, getDateObject());
-        }
+        collectData();
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,30 +72,42 @@ public class ResultActivity extends QuizActivity {
         });
     }
 
-    private Date getDateObject() {
+    protected void collectData() {
+        String newPoints = Float.toString(totalPoints);
+        @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date currentDate = new Date();
-        return currentDate;
+        String newDate = format.format(currentDate);
+
+        String newResult = "";
+
+        if (resultView.length() != 0) {
+            AddData(newPoints, newDate, newResult);
+        }
+
     }
 
-    private void AddData(String newEntry, Date newDate) {
-        boolean insertData = myDb.insertData(newEntry, newDate);
+
+    protected void AddData(String newPoints, String newDate, String newResult) {
+        boolean insertData = myDb.insertData(newPoints, newDate, newResult);
         if (insertData == true) {
-            Toast.makeText(this, "Points stored", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Points added to history", Toast.LENGTH_LONG).show();
+            Log.d("addData", "on tallentanut");
         } else {
-            Toast.makeText(this, "Points not stored", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Points not added", Toast.LENGTH_LONG).show();
         }
     }
 
-    private void whichAnxietyLevel(int totalPointsForMode){
+
+    private void whichAnxietyLevel(int totalPointsForMode) {
         int whichMode = 1;
-        if(totalPointsForMode > 4 && totalPointsForMode < 10){
+        if (totalPointsForMode > 4 && totalPointsForMode < 10) {
             whichMode = 2;
-        } else if (totalPointsForMode > 9 && totalPointsForMode < 15){
+        } else if (totalPointsForMode > 9 && totalPointsForMode < 15) {
             whichMode = 3;
-        } else if (totalPointsForMode > 14){
+        } else if (totalPointsForMode > 14) {
             whichMode = 4;
         }
-        switch(whichMode){
+        switch (whichMode) {
             case 1:
                 resultInfo.setText("Low anxiety");
                 break;

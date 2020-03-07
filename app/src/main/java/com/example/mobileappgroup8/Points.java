@@ -6,28 +6,28 @@ import java.util.Date;
 
 public class Points {
 
-    private String points;
-    private Date date;
 
-    public Points(String points, Date date) {
+    private String points;
+    private String date;
+    private String result;
+
+    public Points(String points, String date, String result) {
         this.points = points;
         this.date = date;
+        this.result = result;
     }
 
     public String getPoints() {
         return points;
     }
 
-    public void setPoints(String points) {
-        this.points = points;
-    }
-
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public String getResult() {
+        return result;
+
     }
 
     @NonNull

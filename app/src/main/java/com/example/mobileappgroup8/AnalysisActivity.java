@@ -89,12 +89,5 @@ public class AnalysisActivity extends MainActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
-
-
     }
-
-
 }
-
-
-
