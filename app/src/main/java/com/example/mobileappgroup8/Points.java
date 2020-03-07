@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Points {
 
- 
+
     private String points;
     private String date;
     private String result;
@@ -27,7 +27,7 @@ public class Points {
 
     public String getResult() {
         return result;
-        
+
     }
 
     @NonNull

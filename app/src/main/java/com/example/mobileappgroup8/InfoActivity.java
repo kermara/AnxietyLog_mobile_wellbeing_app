@@ -25,7 +25,7 @@ public class InfoActivity extends MainActivity {
             public void onClick(View v) {
                 Intent homeActivityIntent = new Intent(InfoActivity.this, MainActivity.class);
                 startActivity(homeActivityIntent);
-                overridePendingTransition(R.anim. slide_in_right, R.anim. slide_out_left);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
@@ -34,9 +34,8 @@ public class InfoActivity extends MainActivity {
             public void onClick(View v) {
                 Intent testActivityIntent = new Intent(InfoActivity.this, QuizActivity.class);
                 startActivity(testActivityIntent);
-                overridePendingTransition(R.anim. slide_in_right, R.anim. slide_out_left);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }
-
 }

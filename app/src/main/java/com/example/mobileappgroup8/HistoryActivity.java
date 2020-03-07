@@ -25,7 +25,6 @@ public class HistoryActivity extends MainActivity {
     private ListView pointsListView;
     private Button home, analysis, delete;
     private TextView databaseMessageView;
-    private ListAdapter listAdapter;
     private Points points;
     private List<Points> pointsList;
 

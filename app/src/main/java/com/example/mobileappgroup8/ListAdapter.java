@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -17,7 +19,7 @@ import java.util.Date;
 
 
 public class ListAdapter extends ArrayAdapter<Points> {
-  private LayoutInflater mInflater;
+    private LayoutInflater mInflater;
     private ArrayList<Points> pointList;
     private int mViewResourceId;
 
@@ -29,26 +31,26 @@ public class ListAdapter extends ArrayAdapter<Points> {
         mViewResourceId = textviewResourceId;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-        convertView = mInflater.inflate(mViewResourceId,null);
+        convertView = mInflater.inflate(mViewResourceId, null);
 
         Points points = pointList.get(position);
 
-        if (points != null){
+        if (points != null) {
             TextView tvPoints = (TextView) convertView.findViewById(R.id.tvPoints);
             TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
             TextView tvResult = (TextView) convertView.findViewById(R.id.tvResult);
 
-            if (tvPoints != null){
+            if (tvPoints != null) {
                 tvPoints.setText(points.getPoints());
             }
 
-            if(tvDate != null){
+            if (tvDate != null) {
                 tvDate.setText(points.getDate());
             }
-            
-             if(tvResult != null){
+
+            if (tvResult != null) {
                 tvDate.setText(points.getResult());
             }
         }

@@ -43,13 +43,6 @@ public class ResultActivity extends QuizActivity {
         whichAnxietyLevel(totalPointsInt);
 
         collectData();
-        
-        /*
-        String newEntry = Float.toString(totalPoints);
-        if (resultView.length() != 0) {
-            AddData(newEntry, getDateObject());
-        }
-        */
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,12 +71,6 @@ public class ResultActivity extends QuizActivity {
             }
         });
     }
-    /*
-    private Date getDateObject() {
-        Date currentDate = new Date();
-        return currentDate;
-    }
-    */
 
     private void collectData() {
         String newPoints = Float.toString(totalPoints);

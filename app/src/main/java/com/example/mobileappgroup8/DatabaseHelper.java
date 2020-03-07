@@ -95,5 +95,3 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db;
     }
 }
-
-
