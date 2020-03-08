@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="14dp">
+    android:padding="14dp"
+    android:background="@drawable/footer_bar">
 
     <TextView
         android:layout_height="wrap_content"
@@ -18,9 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:minWidth="110dp"
         android:layout_alignBaseline="@id/delete_button_history"
-        android:text="Home"
-        android:textSize="16dp"/>
+        android:background="@drawable/home_button" />
 
     <ListView
         android:id="@+id/listView_history"
@@ -32,11 +33,11 @@
         android:id="@+id/delete_button_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="100dp"
         android:layout_below="@id/database_view"
         android:layout_marginTop="225dp"
-        android:text="Delete"
-        android:textSize="16dp"/>
+        android:minWidth="110dp"
+       android:background="@drawable/delete_button"/>
 
 
     <Button
@@ -45,8 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/delete_button_history"
         android:layout_alignParentRight="true"
-        android:text="Analysis"
-        android:textSize="16dp"/>
+        android:minWidth="120dp"
+        android:background="@drawable/analysis_button"/>
 
     <TextView
         android:id="@+id/database_view"

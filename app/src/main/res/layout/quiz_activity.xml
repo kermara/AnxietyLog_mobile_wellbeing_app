@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:layout_alignParentBottom="true"
     android:animateLayoutChanges="true"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/footer_bar">
 
     <TextView
         android:id="@+id/text_view_question_title"
@@ -67,22 +68,21 @@
 
     <Button
         android:id="@+id/back_button"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="440dp"
-        android:text="Back"
+        android:background="@drawable/back_button"
         android:visibility="invisible"
-        android:textSize="16dp"/>
+        />
 
     <Button
         android:id="@+id/next_button"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginTop="440dp"
-        android:text="Next"
-        android:textSize="16dp"/>
+        android:background="@drawable/next_button" />
 
     <TextView
         android:id="@+id/error_textView"
@@ -99,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="505dp"
-        android:text="Home"
-        android:textSize="16dp"/>
+        android:minWidth="110dp"
+        android:background="@drawable/home_button"/>
 
 </RelativeLayout>
