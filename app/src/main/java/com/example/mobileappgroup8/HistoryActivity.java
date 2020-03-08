@@ -43,16 +43,9 @@ public class HistoryActivity extends MainActivity {
         db = new DatabaseHelper(this);
         databaseToDelete = db.getWritableDatabase();
 
-        //ArrayList<String> list = new ArrayList<>();
         pointsList = new ArrayList<>();
         final Cursor cursor = db.viewData();
 
-        /*while (cursor.moveToNext()) {
-            list.add(cursor.getString(1));
-            list.add(cursor.getString(2));
-            listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
-            pointsListView.setAdapter(listAdapter);
-        }*/
         while (cursor.moveToNext()) {
             points = new Points(cursor.getString(1), cursor.getString(2), cursor.getString(3));
             pointsList.add(points);
