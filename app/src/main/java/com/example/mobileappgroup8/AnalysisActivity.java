@@ -46,6 +46,7 @@ public class AnalysisActivity extends MainActivity {
         Cursor cursorLast = database.rawQuery(change, null);
         cursorLast.moveToLast();
 
+
         if (getIntent().getExtras() == null) {
             if (cursorLast.getCount() > 1) {
                 countTv.setText(Long.toString(DatabaseUtils.queryNumEntries(database, DB_TABLE)));
@@ -99,7 +100,6 @@ public class AnalysisActivity extends MainActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
-
         historyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
