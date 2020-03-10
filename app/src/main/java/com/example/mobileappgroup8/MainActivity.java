@@ -7,6 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * Class is used for navigating to other activities through buttons.
+ * @author Irina Konovalova
+ * @version 1.1 3/2020
+ */
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -20,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         Button analysis = findViewById(R.id.analysis_button);
         Button info = findViewById(R.id.info_button);
 
+
+        //OnClickListeners for switching between activities with animations by pressing the buttons.
         startTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

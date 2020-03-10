@@ -14,6 +14,14 @@ import static com.example.mobileappgroup8.DatabaseHelper.KEY_POINTS;
 import static com.example.mobileappgroup8.HistoryActivity.EXTRA;
 import static com.example.mobileappgroup8.HistoryActivity.EXTRATWO;
 
+/**
+ * Class is used for calculating basic statistics of database content.
+ * The displayed content of this class depends on whether it is accessed from
+ * ListView of the HistoryActivity class or through Analysis button of MainActivity and HistoryActivity classes..
+ * @author Irina Konovalova
+ * @version 1.1 3/2020
+ */
+
 public class AnalysisActivity extends MainActivity {
 
     private DatabaseHelper db;
@@ -40,13 +48,18 @@ public class AnalysisActivity extends MainActivity {
         homeButton = findViewById(R.id.home_button_analysis);
         historyButton = findViewById(R.id.history_button_analysis);
 
+
+        //Goes through the KEY_POINTS column of the SQL database and stores the result of the query.
         db = new DatabaseHelper(this);
         database = db.getWritableDatabase();
         String change = "SELECT(" + KEY_POINTS + ") FROM " + DB_TABLE;
         Cursor cursorLast = database.rawQuery(change, null);
         cursorLast.moveToLast();
 
-
+        //If there are no intents the cursor is checked whether there are at least two entries
+        //in the database. If there are, statistics are calculated (change between two last results,
+        //total entries, average points and most common result category). If there are less than
+        //two entries, text views corresponding to statistics are set empty and a message is displayed.
         if (getIntent().getExtras() == null) {
             if (cursorLast.getCount() > 1) {
                 countTv.setText(Long.toString(DatabaseUtils.queryNumEntries(database, DB_TABLE)));
@@ -79,6 +92,9 @@ public class AnalysisActivity extends MainActivity {
                 messageTv.setText("You need to complete the test at least twice\n to view analysis");
             }
         } else {
+
+            //If there are intents, it means that Analysis Activity is accessed through the list view of
+            //HistoryActivity class (and not the Analysis button). The intents are received and set to the text views.
             Bundle b = getIntent().getExtras();
             String dateFromListView = b.getString(EXTRATWO);
             String pointsFromListView = b.getString(EXTRA);
@@ -92,6 +108,7 @@ public class AnalysisActivity extends MainActivity {
             dateFromListView = null;
         }
 
+        //OnClickListeners for switching between activities with animations by pressing the buttons.
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +117,7 @@ public class AnalysisActivity extends MainActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
+
         historyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,6 +128,9 @@ public class AnalysisActivity extends MainActivity {
         });
     }
 
+    //Method is used to set the correct text to the text views based on the points variable.
+    //throughHistoryActivity is used to determine whether the activity was started through list view
+    // of HistoryActivity class.
     private void whichAnxietyLevel(float points, boolean ThroughHistoryActivity) {
         if (ThroughHistoryActivity == true) {
             countTitleTv.setText(null);
