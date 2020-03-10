@@ -18,6 +18,7 @@ import static com.example.mobileappgroup8.HistoryActivity.EXTRATWO;
  * Class is used for calculating basic statistics of database content.
  * The displayed content of this class depends on whether it is accessed from
  * ListView of the HistoryActivity class or through Analysis button of MainActivity and HistoryActivity classes..
+ *
  * @author Irina Konovalova
  * @version 1.1 3/2020
  */
@@ -56,10 +57,10 @@ public class AnalysisActivity extends MainActivity {
         Cursor cursorLast = database.rawQuery(change, null);
         cursorLast.moveToLast();
 
-        //If there are no intents the cursor is checked whether there are at least two entries
-        //in the database. If there are, statistics are calculated (change between two last results,
-        //total entries, average points and most common result category). If there are less than
-        //two entries, text views corresponding to statistics are set empty and a message is displayed.
+        /*If there are no intents the cursor is checked whether there are at least two entries
+        in the database. If there are, statistics are calculated (change between two last results,
+        total entries, average points and most common result category). If there are less than
+        two entries, text views corresponding to statistics are set empty and a message is displayed.*/
         if (getIntent().getExtras() == null) {
             if (cursorLast.getCount() > 1) {
                 countTv.setText(Long.toString(DatabaseUtils.queryNumEntries(database, DB_TABLE)));
@@ -93,8 +94,8 @@ public class AnalysisActivity extends MainActivity {
             }
         } else {
 
-            //If there are intents, it means that Analysis Activity is accessed through the list view of
-            //HistoryActivity class (and not the Analysis button). The intents are received and set to the text views.
+            /*If there are intents, it means that Analysis Activity is accessed through the list view of
+            HistoryActivity class (and not the Analysis button). The intents are received and set to the text views.*/
             Bundle b = getIntent().getExtras();
             String dateFromListView = b.getString(EXTRATWO);
             String pointsFromListView = b.getString(EXTRA);
@@ -128,9 +129,9 @@ public class AnalysisActivity extends MainActivity {
         });
     }
 
-    //Method is used to set the correct text to the text views based on the points variable.
-    //throughHistoryActivity is used to determine whether the activity was started through list view
-    // of HistoryActivity class.
+    /*Method is used to set the correct text to the text views based on the points variable.
+    throughHistoryActivity is used to determine whether the activity was started through list view
+    of HistoryActivity class.*/
     private void whichAnxietyLevel(float points, boolean ThroughHistoryActivity) {
         if (ThroughHistoryActivity == true) {
             countTitleTv.setText(null);
