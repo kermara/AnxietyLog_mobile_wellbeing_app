@@ -171,6 +171,7 @@ public class QuizActivity extends MainActivity {
         rg1.clearCheck();
         ObjectAnimator.ofInt(pBar, "progress", (pBar.getProgress() - 2000)).setDuration(100).start();
     }
+
     //Checks which of the radioButtons is ticked for the switch case in the nextButton onClickListener.
     private int whichRadioButtonIsTicked() {
         int buttonSelection = 1;
@@ -183,6 +184,7 @@ public class QuizActivity extends MainActivity {
         }
         return buttonSelection;
     }
+
     /*Calculates the second row of the matrix for the total points of the quiz.
     The question numbers are stored on the first ([0]) row and the points to the corresponding question number
     are stored on the row below.*/
@@ -193,6 +195,7 @@ public class QuizActivity extends MainActivity {
         }
         return pointsTotal;
     }
+
     //Plays the question animations. if the boolean is true, the animations are played for the next question.
     private void startAnimations(boolean nextQuestion) {
         if (nextQuestion == true) {

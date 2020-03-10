@@ -141,7 +141,8 @@ public class AnalysisActivity extends MainActivity {
                 avgDescTv.setText("Mild anxiety");
                 modeTv.setText("                     Monitor");
             } else if (points >= 10 && points < 15) {
-                modeTv.setText("            Moderate anxiety");
+                avgDescTv.setText("Moderate anxiety");
+                modeTv.setText("Possible clinically significant condition");
 
             } else if (points > 15) {
                 avgDescTv.setText("Severe anxiety");

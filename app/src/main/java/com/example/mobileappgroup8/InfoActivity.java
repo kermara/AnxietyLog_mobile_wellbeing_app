@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 /**
  * Class is used for displaying information about the app
+ *
  * @author Irina Konovalova
  * @version 1.1 3/2020
  */

@@ -9,6 +9,7 @@ import android.widget.Button;
 
 /**
  * Class is used for navigating to other activities through buttons.
+ *
  * @author Irina Konovalova
  * @version 1.1 3/2020
  */
