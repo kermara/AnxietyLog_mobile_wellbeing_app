@@ -37,7 +37,7 @@ public class ResultActivity extends QuizActivity {
         Intent quizIntent = getIntent();
         totalPoints = quizIntent.getFloatExtra("Total points", 0);
         totalPointsInt = (int) (totalPoints);
-        resultView.setText("You got " + totalPointsInt + " points");
+        resultView.setText("Your anxiety score is " + totalPointsInt);
 
 
         whichAnxietyLevel(totalPointsInt);

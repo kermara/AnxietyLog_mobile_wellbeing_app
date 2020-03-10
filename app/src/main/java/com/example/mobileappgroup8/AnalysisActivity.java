@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import static com.example.mobileappgroup8.DatabaseHelper.DB_TABLE;
 import static com.example.mobileappgroup8.DatabaseHelper.KEY_POINTS;
 
@@ -26,6 +28,11 @@ public class AnalysisActivity extends MainActivity {
         TextView countTv = findViewById(R.id.total_entries_tv);
         TextView changeTv = findViewById(R.id.change_tv);
         TextView avgDescTv = findViewById(R.id.avg_desc_tv);
+        TextView averageTitleTv = findViewById(R.id.average_title);
+        TextView countTitleTv = findViewById(R.id.total_entries_title);
+        TextView changeTitleTv = findViewById(R.id.change_title);
+        TextView avgDescTitleTv = findViewById(R.id.most_common_title);
+        TextView messageTv = findViewById(R.id.message_analysis);
 
         Button homeButton = findViewById(R.id.home_button_analysis);
         Button historyButton = findViewById(R.id.history_button_analysis);
@@ -60,7 +67,7 @@ public class AnalysisActivity extends MainActivity {
                 avgDescTv.setText("No anxiety");
             } else if (averagePoints >= 5 && averagePoints <= 9) {
                 avgDescTv.setText("Mild anxiety");
-            } else if (averagePoints >= 10 && averagePoints <= 14) {
+            } else if (averagePoints >= 10 && averagePoints < 15) {
                 avgDescTv.setText("Moderate anxiety");
             } else if (averagePoints > 15) {
                 avgDescTv.setText("Severe anxiety");
@@ -70,6 +77,11 @@ public class AnalysisActivity extends MainActivity {
             averageTv.setText("");
             avgDescTv.setText("");
             changeTv.setText("");
+            countTitleTv.setText("");
+            averageTitleTv.setText("");
+            avgDescTitleTv.setText("");
+            changeTitleTv.setText("");
+            messageTv.setText("You need to complete the test at least twice\n to view analysis");
         }
 
         homeButton.setOnClickListener(new View.OnClickListener() {
