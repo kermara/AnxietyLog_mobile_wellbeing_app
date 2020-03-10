@@ -6,7 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+/**
+ * Class is used for displaying information about the app
+ * @author Irina Konovalova
+ * @version 1.1 3/2020
+ */
 
 public class InfoActivity extends MainActivity {
 
@@ -48,6 +52,8 @@ public class InfoActivity extends MainActivity {
         tv3.setText("This app is not to be used as a diagnostic tool nor as a treatment for any medical conditions. " +
                 "The content of this app should not be used as a substitute for advice of health care professionals.");
 
+
+        //OnClickListeners for switching between activities with buttons
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
