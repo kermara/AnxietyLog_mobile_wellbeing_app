@@ -14,22 +14,31 @@ import static com.example.mobileappgroup8.DatabaseHelper.KEY_POINTS;
 import static com.example.mobileappgroup8.HistoryActivity.EXTRA;
 import static com.example.mobileappgroup8.HistoryActivity.EXTRATWO;
 
-public class AnalysisActivity extends ResultActivity {
+public class AnalysisActivity extends MainActivity {
 
-    protected DatabaseHelper db;
-    protected SQLiteDatabase database;
+    private DatabaseHelper db;
+    private SQLiteDatabase database;
+    private TextView averageTv, countTv, changeTv, avgDescTv, averageTitleTv, countTitleTv, changeTitleTv, avgDescTitleTv, messageTv, modeTv;
+    private Button homeButton, historyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.analysis_activity);
 
-        TextView averageTv = findViewById(R.id.average_tv);
-        TextView countTv = findViewById(R.id.total_entries_tv);
-        TextView changeTv = findViewById(R.id.change_tv);
-        TextView avgDescTv = findViewById(R.id.avg_desc_tv);
-        Button homeButton = findViewById(R.id.home_button_analysis);
-        Button historyButton = findViewById(R.id.history_button_analysis);
+        averageTv = findViewById(R.id.average_tv);
+        countTv = findViewById(R.id.total_entries_tv);
+        changeTv = findViewById(R.id.change_tv);
+        avgDescTv = findViewById(R.id.avg_desc_tv);
+        averageTitleTv = findViewById(R.id.average_title);
+        countTitleTv = findViewById(R.id.total_entries_title);
+        changeTitleTv = findViewById(R.id.change_title);
+        avgDescTitleTv = findViewById(R.id.most_common_title);
+        messageTv = findViewById(R.id.message_analysis);
+        modeTv = findViewById(R.id.mode_description_tv);
+
+        homeButton = findViewById(R.id.home_button_analysis);
+        historyButton = findViewById(R.id.history_button_analysis);
 
         db = new DatabaseHelper(this);
         database = db.getWritableDatabase();
@@ -56,31 +65,28 @@ public class AnalysisActivity extends ResultActivity {
                 String averagePointsString = String.format("%.2f", Float.valueOf(cursorAvg.getString(0)));
                 Float averagePoints = Float.valueOf(averagePointsString);
                 averageTv.setText(averagePointsString);
-
-                if (averagePoints <= 4) {
-                    avgDescTv.setText("No anxiety");
-                } else if (averagePoints >= 5 && averagePoints <= 9) {
-                    avgDescTv.setText("Mild anxiety");
-                } else if (averagePoints >= 10 && averagePoints <= 14) {
-                    avgDescTv.setText("Moderate anxiety");
-                } else if (averagePoints > 15) {
-                    avgDescTv.setText("Severe anxiety");
-                }
+                whichAnxietyLevel(averagePoints, false);
             } else {
-                countTv.setText(null);
-                averageTv.setText(null);
-                avgDescTv.setText(null);
-                changeTv.setText(null);
+                countTv.setText("");
+                averageTv.setText("");
+                avgDescTv.setText("");
+                changeTv.setText("");
+                countTitleTv.setText("");
+                averageTitleTv.setText("");
+                avgDescTitleTv.setText("");
+                changeTitleTv.setText("");
+                messageTv.setText("You need to complete the test at least twice\n to view analysis");
             }
         } else {
             Bundle b = getIntent().getExtras();
             String dateFromListView = b.getString(EXTRATWO);
-            String pointsFromListView = b.getString(EXTRA);;
-            averageTv.setText(pointsFromListView);
-            avgDescTv.setText(dateFromListView);
-            whichAnxietyLevel(Float.valueOf(pointsFromListView));
-            changeTv.setText(null);
-            countTv.setText(null);
+            String pointsFromListView = b.getString(EXTRA);
+            changeTitleTv.setText("Points: ");
+            averageTv.setText(dateFromListView);
+            averageTitleTv.setText("Date: ");
+            changeTv.setText(pointsFromListView);
+            avgDescTitleTv.setText("Description");
+            whichAnxietyLevel(Float.valueOf(pointsFromListView), true);
             pointsFromListView = null;
             dateFromListView = null;
         }
@@ -102,5 +108,33 @@ public class AnalysisActivity extends ResultActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
+    }
+
+    private void whichAnxietyLevel(float points, boolean ThroughHistoryActivity) {
+        if (ThroughHistoryActivity == true) {
+            countTitleTv.setText(null);
+            if (points <= 4) {
+                avgDescTv.setText("No anxiety");
+            } else if (points >= 5 && points <= 9) {
+                avgDescTv.setText("Mild anxiety");
+                modeTv.setText("                     Monitor");
+            } else if (points >= 10 && points < 15) {
+                modeTv.setText("            Moderate anxiety");
+
+            } else if (points > 15) {
+                avgDescTv.setText("Severe anxiety");
+                modeTv.setText("Active treatment probably warranted");
+            }
+        } else {
+            if (points <= 4) {
+                avgDescTv.setText("No anxiety");
+            } else if (points >= 5 && points <= 9) {
+                avgDescTv.setText("Mild anxiety");
+            } else if (points >= 10 && points < 15) {
+                avgDescTv.setText("Moderate anxiety");
+            } else if (points > 15) {
+                avgDescTv.setText("Severe anxiety");
+            }
+        }
     }
 }

@@ -12,7 +12,8 @@
         android:gravity="center"
         android:text="Points"
         android:textAlignment="center"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#000000"/>
 
     <TextView
         android:id="@+id/tvResult"
@@ -28,6 +29,7 @@
         android:layout_height="match_parent"
         android:layout_weight="20"
         android:gravity="start"
-        android:text="Date" />
+        android:text="Date"
+        android:textColor="#000000"/>
 
 </LinearLayout>
