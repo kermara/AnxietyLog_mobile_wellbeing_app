@@ -42,12 +42,7 @@ public class ResultActivity extends QuizActivity {
         
         collectData();
         
-        /*
-        String newEntry = Float.toString(totalPoints);
-        if (resultView.length() != 0) {
-            AddData(newEntry, getDateObject());
-        }
-        */
+  
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,38 +71,18 @@ public class ResultActivity extends QuizActivity {
             }
         });
     }
-    /*
-    private Date getDateObject() {
-        Date currentDate = new Date();
-        return currentDate;
-    }
-    */
-    
-    public void collectData() {
 
-        String newPoints = resultView.getText().toString();
-        @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        Date currentDate = new Date();
-        String newDate = format.format(currentDate);
+        String newPoints = getNewPoints();
+        String newDate = getDate();
 
-        String newResult = "testing testing";
+       String newResult = getNewResult();
 
-        if (resultView.length() != 0) {
+        if (editText.length() != 0) {
+
             AddData(newPoints, newDate, newResult);
+
+
         }
-
-    }
-
-
-    public void AddData(String newPoints, String newDate, String newResult) {
-        boolean insertData = myDb.insertData(newPoints, newDate, newResult);
-        if (insertData == true) {
-            Toast.makeText(this, "Points added to history", Toast.LENGTH_LONG).show();
-            Log.d("addData", "on tallentanut");
-        } else {
-            Toast.makeText(this, "Points not added", Toast.LENGTH_LONG).show();
-        }
-    }
 
     private void whichAnxietyLevel(int totalPointsForMode){
         int whichMode = 1;
