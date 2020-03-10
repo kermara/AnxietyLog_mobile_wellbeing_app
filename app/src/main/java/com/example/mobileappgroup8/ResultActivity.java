@@ -41,7 +41,7 @@ public class ResultActivity extends QuizActivity {
         whichAnxietyLevel(totalPointsInt);
         
         collectData();
-        
+  
   
 
         history.setOnClickListener(new View.OnClickListener() {
@@ -71,17 +71,63 @@ public class ResultActivity extends QuizActivity {
             }
         });
     }
-
+    protected void collectData() {
+        
         String newPoints = getNewPoints();
         String newDate = getDate();
-
-       String newResult = getNewResult();
-
-        if (editText.length() != 0) {
-
+        String newResult = getNewResult();
+        if (resultView.length() != 0) {
             AddData(newPoints, newDate, newResult);
+        }
+    }
+
+    protected String getNewPoints(){
+        String newPoints = Float.toString(totalPoints);
+        return newPoints;
+    }
+
+    protected String getDate(){
+        @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Date currentDate = new Date();
+        String newDate = format.format(currentDate);
+        return newDate;
+    }
+
+    protected String getNewResult(){
+        int testpoint = Integer.parseInt(getNewPoints());
+        String testing;
+        if (testpoint <= 4) {
+            return ("No anxiety");
+        } else if (testpoint >= 5 && testpoint <= 9) {
+            return ("Mild anxiety");
+        } else if (testpoint >= 10 && testpoint <= 14) {
+            return ("Moderate anxiety");
+        } else if (testpoint > 15) {
+            return ("Severe anxiety");
+        }
+        return "testing";
+    }
+
+    protected void AddData(String newPoints, String newDate, String newResult) {
+        boolean insertData = myDb.insertData(newPoints, newDate, newResult);
+        if (insertData == true) {
+            Toast.makeText(this, "Points added to history", Toast.LENGTH_LONG).show();
+            Log.d("addData", "on tallentanut");
+        } else {
+            Toast.makeText(this, "Points not added", Toast.LENGTH_LONG).show();
+        }
+    }
+    
 
 
+        protected void AddData(String newPoints, String newDate, String newResult) {
+        boolean insertData = myDb.insertData(newPoints, newDate, newResult);
+        if (insertData == true) {
+            Toast.makeText(this, "Points added to history", Toast.LENGTH_LONG).show();
+            Log.d("addData", "on tallentanut");
+        } else {
+            Toast.makeText(this, "Points not added", Toast.LENGTH_LONG).show();
+        }
         }
 
     private void whichAnxietyLevel(int totalPointsForMode){
