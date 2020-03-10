@@ -4,17 +4,14 @@ package com.example.mobileappgroup8;
  * created by Kerttuli 5.3.2020
  * To create a database
  */
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import java.util.Date;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-
 
     private static final String DATABASE_NAME = "user_info";
     private static final int DATABASE_VERSION = 1;

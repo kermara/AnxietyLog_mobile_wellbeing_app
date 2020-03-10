@@ -40,7 +40,7 @@ public class ResultActivity extends QuizActivity {
         resultView.setText("Your anxiety score is " + totalPointsInt);
 
 
-        whichAnxietyLevel(totalPointsInt);
+        whichAnxietyLevel(totalPoints);
 
         collectData();
 
@@ -72,7 +72,7 @@ public class ResultActivity extends QuizActivity {
         });
     }
 
-    protected void collectData() {
+    private void collectData() {
         String newPoints = Float.toString(totalPoints);
         @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date currentDate = new Date();
@@ -83,11 +83,10 @@ public class ResultActivity extends QuizActivity {
         if (resultView.length() != 0) {
             AddData(newPoints, newDate, newResult);
         }
-
     }
 
 
-    protected void AddData(String newPoints, String newDate, String newResult) {
+    private void AddData(String newPoints, String newDate, String newResult) {
         boolean insertData = myDb.insertData(newPoints, newDate, newResult);
         if (insertData == true) {
             Toast.makeText(this, "Points added to history", Toast.LENGTH_LONG).show();
@@ -98,7 +97,7 @@ public class ResultActivity extends QuizActivity {
     }
 
 
-    private void whichAnxietyLevel(int totalPointsForMode) {
+    private void whichAnxietyLevel(float totalPointsForMode) {
         int whichMode = 1;
         if (totalPointsForMode > 4 && totalPointsForMode < 10) {
             whichMode = 2;

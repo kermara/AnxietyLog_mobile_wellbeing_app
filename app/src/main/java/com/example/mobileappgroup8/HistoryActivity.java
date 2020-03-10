@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.example.mobileappgroup8.DatabaseHelper.DB_TABLE;
@@ -27,6 +30,9 @@ public class HistoryActivity extends MainActivity {
     private TextView databaseMessageView;
     private Points points;
     private List<Points> pointsList;
+    protected static final String EXTRA = "com.example.mobileappgroup8.MESSAGE";
+    protected static final String EXTRATWO = "com.example.mobileappgroup8.MESSAGE2";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +82,6 @@ public class HistoryActivity extends MainActivity {
         } else {
             databaseMessageView.setText("No results saved");
         }
-
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +90,6 @@ public class HistoryActivity extends MainActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
-
         analysis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,5 +98,20 @@ public class HistoryActivity extends MainActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
+        pointsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d("TAG", "onItemClick(" + i + ")");
+                Intent intent = new Intent(HistoryActivity.this,AnalysisActivity.class);
+                String pointsFromListView = ((TextView)view.findViewById(R.id.tvPoints)).getText().toString();
+                String dateFromListView = ((TextView)view.findViewById(R.id.tvDate)).getText().toString();
+                intent.putExtra(EXTRATWO, dateFromListView);
+                intent.putExtra(EXTRA, pointsFromListView);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+        Collections.reverse(pointsList);
     }
 }
+
