@@ -40,7 +40,7 @@ public class ResultActivity extends QuizActivity {
         resultView.setText("You got " + totalPointsInt + " points");
 
 
-        whichAnxietyLevel(totalPointsInt);
+        whichAnxietyLevel(totalPoints);
 
         collectData();
 
@@ -83,7 +83,6 @@ public class ResultActivity extends QuizActivity {
         if (resultView.length() != 0) {
             AddData(newPoints, newDate, newResult);
         }
-
     }
 
 
@@ -98,7 +97,7 @@ public class ResultActivity extends QuizActivity {
     }
 
 
-    private void whichAnxietyLevel(int totalPointsForMode) {
+    protected void whichAnxietyLevel(float totalPointsForMode) {
         int whichMode = 1;
         if (totalPointsForMode > 4 && totalPointsForMode < 10) {
             whichMode = 2;

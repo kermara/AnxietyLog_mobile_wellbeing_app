@@ -11,8 +11,10 @@ import android.widget.TextView;
 
 import static com.example.mobileappgroup8.DatabaseHelper.DB_TABLE;
 import static com.example.mobileappgroup8.DatabaseHelper.KEY_POINTS;
+import static com.example.mobileappgroup8.HistoryActivity.EXTRA;
+import static com.example.mobileappgroup8.HistoryActivity.EXTRATWO;
 
-public class AnalysisActivity extends MainActivity {
+public class AnalysisActivity extends ResultActivity {
 
     protected DatabaseHelper db;
     protected SQLiteDatabase database;
@@ -26,7 +28,6 @@ public class AnalysisActivity extends MainActivity {
         TextView countTv = findViewById(R.id.total_entries_tv);
         TextView changeTv = findViewById(R.id.change_tv);
         TextView avgDescTv = findViewById(R.id.avg_desc_tv);
-
         Button homeButton = findViewById(R.id.home_button_analysis);
         Button historyButton = findViewById(R.id.history_button_analysis);
 
@@ -36,40 +37,52 @@ public class AnalysisActivity extends MainActivity {
         Cursor cursorLast = database.rawQuery(change, null);
         cursorLast.moveToLast();
 
-        if (cursorLast.getCount() > 1) {
-            countTv.setText(Long.toString(DatabaseUtils.queryNumEntries(database, DB_TABLE)));
-            float lastEntry = Float.valueOf(cursorLast.getString(0));
-            cursorLast.moveToPosition(cursorLast.getCount() - 2);
-            float secondLastEntry = Float.valueOf(cursorLast.getString(0));
-            //float changeSinceLast = Math.round((lastEntry - secondLastEntry)/secondLastEntry * 100 * 100)/100.0f;
-            float changeSinceLast = lastEntry - secondLastEntry;
+        if (getIntent().getExtras() == null) {
+            if (cursorLast.getCount() > 1) {
+                countTv.setText(Long.toString(DatabaseUtils.queryNumEntries(database, DB_TABLE)));
+                float lastEntry = Float.valueOf(cursorLast.getString(0));
+                cursorLast.moveToPosition(cursorLast.getCount() - 2);
+                float secondLastEntry = Float.valueOf(cursorLast.getString(0));
+                float changeSinceLast = lastEntry - secondLastEntry;
 
-            if (changeSinceLast < 0) {
-                changeTv.setText(Float.toString(changeSinceLast));
+                if (changeSinceLast < 0) {
+                    changeTv.setText(Float.toString(changeSinceLast));
+                } else {
+                    changeTv.setText("+" + changeSinceLast);
+                }
+                String average = "SELECT AVG(" + KEY_POINTS + ") FROM " + DB_TABLE;
+                Cursor cursorAvg = database.rawQuery(average, null);
+                cursorAvg.moveToFirst();
+                String averagePointsString = String.format("%.2f", Float.valueOf(cursorAvg.getString(0)));
+                Float averagePoints = Float.valueOf(averagePointsString);
+                averageTv.setText(averagePointsString);
+
+                if (averagePoints <= 4) {
+                    avgDescTv.setText("No anxiety");
+                } else if (averagePoints >= 5 && averagePoints <= 9) {
+                    avgDescTv.setText("Mild anxiety");
+                } else if (averagePoints >= 10 && averagePoints <= 14) {
+                    avgDescTv.setText("Moderate anxiety");
+                } else if (averagePoints > 15) {
+                    avgDescTv.setText("Severe anxiety");
+                }
             } else {
-                changeTv.setText("+" + changeSinceLast);
-            }
-            String average = "SELECT AVG(" + KEY_POINTS + ") FROM " + DB_TABLE;
-            Cursor cursorAvg = database.rawQuery(average, null);
-            cursorAvg.moveToFirst();
-            String averagePointsString = String.format("%.2f", Float.valueOf(cursorAvg.getString(0)));
-            Float averagePoints = Float.valueOf(averagePointsString);
-            averageTv.setText(averagePointsString);
-
-            if (averagePoints <= 4) {
-                avgDescTv.setText("No anxiety");
-            } else if (averagePoints >= 5 && averagePoints <= 9) {
-                avgDescTv.setText("Mild anxiety");
-            } else if (averagePoints >= 10 && averagePoints <= 14) {
-                avgDescTv.setText("Moderate anxiety");
-            } else if (averagePoints > 15) {
-                avgDescTv.setText("Severe anxiety");
+                countTv.setText(null);
+                averageTv.setText(null);
+                avgDescTv.setText(null);
+                changeTv.setText(null);
             }
         } else {
-            countTv.setText("");
-            averageTv.setText("");
-            avgDescTv.setText("");
-            changeTv.setText("");
+            Bundle b = getIntent().getExtras();
+            String dateFromListView = b.getString(EXTRATWO);
+            String pointsFromListView = b.getString(EXTRA);;
+            averageTv.setText(pointsFromListView);
+            avgDescTv.setText(dateFromListView);
+            whichAnxietyLevel(Float.valueOf(pointsFromListView));
+            changeTv.setText(null);
+            countTv.setText(null);
+            pointsFromListView = null;
+            dateFromListView = null;
         }
 
         homeButton.setOnClickListener(new View.OnClickListener() {

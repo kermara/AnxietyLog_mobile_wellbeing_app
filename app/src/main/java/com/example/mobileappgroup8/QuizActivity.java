@@ -1,16 +1,20 @@
 package com.example.mobileappgroup8;
 
+import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 
 public class QuizActivity extends MainActivity {
@@ -21,9 +25,10 @@ public class QuizActivity extends MainActivity {
     private int questionNumber = 1;
     private RadioButton rb1, rb2, rb3, rb4;
     private RadioGroup rg1;
-    private TextView questionTV, errorView, questionNumberView;
+    private TextView questionTV, errorView, numberView;
     private Button nextButton, backButton, homeButton;
     private Animation slideIn, slideOut, slideInBackwards, slideOutBackwards, rgSlideIn, rgSlideOut, rgSlideInBackwards, rgSlideOutBackwards;
+    private ProgressBar pBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +41,13 @@ public class QuizActivity extends MainActivity {
         rb3 = findViewById(R.id.radio_button_3);
         rb4 = findViewById(R.id.radio_button_4);
         questionTV = findViewById(R.id.text_view_question);
+        numberView = findViewById(R.id.question_number_view);
         errorView = findViewById(R.id.error_textView);
-        questionNumberView = findViewById(R.id.text_view_question_number);
         nextButton = findViewById(R.id.next_button);
         backButton = findViewById(R.id.back_button);
         homeButton = findViewById(R.id.home_button_quiz);
+        pBar = findViewById(R.id.progress_bar);
+
 
         slideIn = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
         slideOut = AnimationUtils.loadAnimation(this, R.anim.slide_out_left);
@@ -52,7 +59,8 @@ public class QuizActivity extends MainActivity {
         rgSlideOutBackwards = AnimationUtils.loadAnimation(this, R.anim.rg_slide_out_right);
 
         questionTV.setText(questions[(questionNumber - 1)]);
-        questionNumberView.setText("Question " + questionNumber + "/7");
+        numberView.setText(questionNumber + "/7");
+        pBar.setMax(12000);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,8 +137,9 @@ public class QuizActivity extends MainActivity {
         startAnimations(true);
         errorView.setText("");
         questionTV.setText(questions[(questionNumber - 1)]);
-        questionNumberView.setText("Question " + questionNumber + "/7");
+        numberView.setText(questionNumber + "/7");
         rg1.clearCheck();
+        ObjectAnimator.ofInt(pBar, "progress", (pBar.getProgress() + 2000)).setDuration(250).start();
     }
 
     private void previousQuestion() {
@@ -142,8 +151,9 @@ public class QuizActivity extends MainActivity {
         answeredQuestions[1][(questionNumber - 1)] = 0;
         errorView.setText("");
         questionTV.setText(questions[(questionNumber - 1)]);
-        questionNumberView.setText("Question " + questionNumber + "/7");
+        numberView.setText(questionNumber + "/7");
         rg1.clearCheck();
+        ObjectAnimator.ofInt(pBar, "progress", (pBar.getProgress() - 2000)).setDuration(100).start();
     }
 
     private int whichRadioButtonIsTicked() {
