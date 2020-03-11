@@ -79,7 +79,7 @@ public class QuizActivity extends MainActivity {
             @Override
             public void onClick(View v) {
                 if (rg1.getCheckedRadioButtonId() == -1) {
-                    errorView.setText("You have to select one of the choices");
+                    errorView.setText("You have to select one of the options");
                 } else {
                     //the storePoints method checks which radiobutton is ticked and stores the points on the second row of the matrix
                     storePoints(questionNumber, answeredQuestions, whichRadioButtonIsTicked(rb2, rb3, rb4));
