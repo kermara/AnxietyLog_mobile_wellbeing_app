@@ -31,7 +31,6 @@ import static com.example.mobileappgroup8.DatabaseHelper.DB_TABLE;
 public class HistoryActivity extends MainActivity {
 
     private DatabaseHelper db;
-    private SQLiteDatabase databaseToDelete;
     private ListView pointsListView;
     private Button home, analysis, delete;
     private TextView databaseMessageView;
@@ -54,7 +53,6 @@ public class HistoryActivity extends MainActivity {
         pointsListView = findViewById(R.id.listView_history);
 
         db = new DatabaseHelper(this);
-        databaseToDelete = db.getWritableDatabase();
 
         pointsList = new ArrayList<>();
         final Cursor cursor = db.viewData();
@@ -77,7 +75,7 @@ public class HistoryActivity extends MainActivity {
                             if (option == -1) {
                                 //Refreshes the activity to instantly show the empty listView,
                                 //otherwise the listView would still show the already deleted content.
-                                databaseToDelete.execSQL("delete from " + DB_TABLE);
+                                db.deleteAll();
                                 finish();
                                 overridePendingTransition(0, 0);
                                 startActivity(getIntent());
