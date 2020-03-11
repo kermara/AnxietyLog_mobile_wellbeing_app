@@ -42,9 +42,9 @@ public class Quiz {
      * This method is used for storing points in the matrix. The top row of the matrix is used for storing the numbers 1 - 7,
      * each representing a question in the
      *
-     * @param questionNumber
-     * @param answeredQuestions
-     * @param radioButtonChoice
+     * @param questionNumber the number of the current question in the quiz
+     * @param answeredQuestions the matrix scores and questionNumbers are stored in, scores are on the bottom row
+     * @param radioButtonChoice which radio button was ticked as an integer
      */
     public static void storePoints(int questionNumber, int[][] answeredQuestions, int radioButtonChoice) {
         switch (radioButtonChoice) {

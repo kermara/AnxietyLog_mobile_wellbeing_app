@@ -35,7 +35,7 @@ public class InfoActivity extends MainActivity {
 
         titleTv1.setText("About Anxiety Log\n");
 
-        tv.setText("The purpose of this questionnaire app is to track anxiety level. Tracking anxiety level can be useful for observing changes in anxiety over time." +
+        tv.setText("The purpose of this questionnaire app is to track the user's anxiety level. Tracking anxiety level can be useful for observing changes in anxiety over time." +
                 "This information may be of use for both self-monitoring purpose as well as communicating the symptoms to healthcare professionals.\n "
         );
 
