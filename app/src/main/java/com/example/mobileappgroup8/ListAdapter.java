@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * created by Kerttuli 5.3.2020

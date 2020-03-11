@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.example.mobileappgroup8.DatabaseHelper.DB_TABLE;
-
 /**
  * HistoryActivity class is used for showing the SQL-database content in a ListView.
  * It also contains a button with an alertDialogListener to delete the database content.
