@@ -8,6 +8,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author Kerttuli
+ * created in 10.3.2020
+ * @return Points Object and its methods
+ */
 public class Points {
 
     private String points;

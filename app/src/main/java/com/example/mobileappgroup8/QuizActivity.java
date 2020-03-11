@@ -22,7 +22,7 @@ import static com.example.mobileappgroup8.Quiz.storePoints;
 import static com.example.mobileappgroup8.Quiz.whichRadioButtonIsTicked;
 
 /**
- * QuizActivity shows 7 different questions in the quiz_activity. The results are stored and deleted in a 2d matrix based on the
+ * QuizActivity shows  questions in the quiz_activity. The results are stored and deleted in a 2d matrix based on the
  * RadioButton choices and the clicks of next/back buttons. The point result is sent to ResultActivity with an Intent.
  * The methods used in QuizActivity are static methods from the Quiz class.
  *
