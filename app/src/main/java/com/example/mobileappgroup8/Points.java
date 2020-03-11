@@ -9,9 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+ * returns Points Object and its methods
+ *
  * @author Kerttuli
  * created in 10.3.2020
- * @return Points Object and its methods
  */
 public class Points {
 

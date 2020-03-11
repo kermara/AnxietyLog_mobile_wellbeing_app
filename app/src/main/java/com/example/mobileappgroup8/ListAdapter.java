@@ -12,11 +12,10 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 
 /**
- * created by Kerttuli 5.3.2020
  * To manage the ArrayAdapter
+ *
+ * @author Kerttuli 11.3.2020
  */
-
-
 public class ListAdapter extends ArrayAdapter<Points> {
     private LayoutInflater mInflater;
     private ArrayList<Points> pointList;
