@@ -1,18 +1,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="14dp"
     android:background="@drawable/start_background"
-    >
+    android:padding="14dp">
 
     <Button
         android:id="@+id/start_test_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
         android:layout_centerVertical="true"
-        android:minWidth="150dp"
+        android:layout_marginLeft="80dp"
         android:background="@drawable/start_button"
+        android:minWidth="150dp"
         android:padding="16dp"
         android:textSize="24dp" />
 
@@ -20,29 +19,29 @@
         android:id="@+id/info_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignBottom="@id/history_button"
-        android:minWidth="110dp"
-        android:background="@drawable/info_button"/>
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/info_button"
+        android:minWidth="110dp" />
 
     <Button
         android:id="@+id/history_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:layout_marginLeft="100dp"
         android:layout_below="@id/start_test_button"
-        android:minWidth="110dp"
-        android:background="@drawable/history_button" />
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/history_button"
+        android:minWidth="110dp" />
 
     <Button
         android:id="@+id/analysis_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignBaseline="@id/history_button"
-        android:minWidth="120dp"
-        android:background="@drawable/analysis_button"/>
+        android:layout_alignParentRight="true"
+        android:background="@drawable/analysis_button"
+        android:minWidth="120dp" />
 
 
 </RelativeLayout>

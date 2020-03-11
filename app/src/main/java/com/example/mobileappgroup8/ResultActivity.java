@@ -13,6 +13,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The class is used to display information and store it in the SQL-database based on the point result received in the QuizActivity.
+ *
+ * @author Pauli Vuolle-Apiala, Kerttuli Ratilainen
+ * @Version 1.1 3/2020
+ */
 public class ResultActivity extends QuizActivity {
     private DatabaseHelper myDb;
     private TextView resultView, resultInfo, resultInfoTwo;
@@ -33,17 +39,19 @@ public class ResultActivity extends QuizActivity {
         Button home = findViewById(R.id.home_button_result);
 
         myDb = new DatabaseHelper(this);
-
+        //The intent is received from the QuizActivity and the points are used to show information in the TextViews.
         Intent quizIntent = getIntent();
         totalPoints = quizIntent.getFloatExtra("Total points", 0);
+        //The float is converted to an Int to show the number in the textView without any decimals.
         totalPointsInt = (int) (totalPoints);
         resultView.setText("Your anxiety score is " + totalPointsInt);
 
-
+        //whichAnxietyLevel-method is used to display the correct message in the TextView.
         whichAnxietyLevel(totalPoints);
 
         collectData();
 
+        //OnclickListeners to switch between the activities with animations by pressing the buttons.
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +80,7 @@ public class ResultActivity extends QuizActivity {
         });
     }
 
-    private void collectData() {
+    public void collectData() {
         String newPoints = Float.toString(totalPoints);
         @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date currentDate = new Date();
@@ -86,7 +94,7 @@ public class ResultActivity extends QuizActivity {
     }
 
 
-    private void AddData(String newPoints, String newDate, String newResult) {
+    public void AddData(String newPoints, String newDate, String newResult) {
         boolean insertData = myDb.insertData(newPoints, newDate, newResult);
         if (insertData == true) {
             Toast.makeText(this, "Points added to history", Toast.LENGTH_LONG).show();
@@ -96,8 +104,12 @@ public class ResultActivity extends QuizActivity {
         }
     }
 
-
-    private void whichAnxietyLevel(float totalPointsForMode) {
+    /**
+     * The method is used to set the right messages to the textViews based on the points the user received in the ResultActivity.
+     *
+     * @param totalPointsForMode totalPointsForMode is used to find out which case the totalPoints fall under and which text to set to the textViews.
+     */
+    protected void whichAnxietyLevel(float totalPointsForMode) {
         int whichMode = 1;
         if (totalPointsForMode > 4 && totalPointsForMode < 10) {
             whichMode = 2;

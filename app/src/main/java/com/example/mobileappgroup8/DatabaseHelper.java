@@ -4,6 +4,7 @@ package com.example.mobileappgroup8;
  * created by Kerttuli 5.3.2020
  * To create a database
  */
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -28,7 +29,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_RESULT = "result";
 
 
-
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -39,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 KEY_POINTS + " TEXT," +
                 KEY_DATE + " DATE NOT NULL, " +
-                KEY_RESULT + " TEXT,''" +  ")";
+                KEY_RESULT + " TEXT,''" + ")";
         db.execSQL(CREATE_TABLE);
     }
 
