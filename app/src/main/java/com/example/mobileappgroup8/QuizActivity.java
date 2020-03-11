@@ -93,7 +93,7 @@ public class QuizActivity extends MainActivity {
                             answeredQuestions[0][(questionNumber - 1)] = questionNumber;
                             break;
                     }
-                    /*if questionNumber-variable is 7 when the next-utton is clicked the quiz ends and the ResultActivity begins.
+                    /*if questionNumber-variable is 7 when the next-button is clicked the quiz ends and the ResultActivity begins.
                     The point result is sent to the ResultActivity with an intent.*/
                     if (questionNumber == 7) {
                         Intent nextActivity = new Intent(QuizActivity.this, ResultActivity.class);
@@ -146,7 +146,7 @@ public class QuizActivity extends MainActivity {
         if (questionNumber > 1) {
             backButton.setVisibility(View.VISIBLE);
         }
-        startAnimations(true);
+        startAnimations(true, questionTV, rg1);
         errorView.setText("");
         questionTV.setText(questions[(questionNumber - 1)]);
         numberView.setText(questionNumber + "/7");
@@ -163,7 +163,7 @@ public class QuizActivity extends MainActivity {
         if (questionNumber == 1) {
             backButton.setVisibility(View.INVISIBLE);
         }
-        startAnimations(false);
+        startAnimations(false, questionTV, rg1);
         answeredQuestions[1][(questionNumber - 1)] = 0;
         errorView.setText("");
         questionTV.setText(questions[(questionNumber - 1)]);
@@ -195,19 +195,17 @@ public class QuizActivity extends MainActivity {
         }
         return pointsTotal;
     }
-
-    //Plays the question animations. if the boolean is true, the animations are played for the next question.
-    private void startAnimations(boolean nextQuestion) {
+    public void startAnimations(boolean nextQuestion, TextView tv, RadioGroup rg) {
         if (nextQuestion == true) {
-            questionTV.startAnimation(slideOut);
-            questionTV.startAnimation(slideIn);
-            rg1.startAnimation(rgSlideOut);
-            rg1.startAnimation(rgSlideIn);
+            tv.startAnimation(slideOut);
+            tv.startAnimation(slideIn);
+            rg.startAnimation(rgSlideOut);
+            rg.startAnimation(rgSlideIn);
         } else {
-            questionTV.startAnimation(slideOutBackwards);
-            questionTV.startAnimation(slideInBackwards);
-            rg1.startAnimation(rgSlideOutBackwards);
-            rg1.startAnimation(rgSlideInBackwards);
+            tv.startAnimation(slideOutBackwards);
+            tv.startAnimation(slideInBackwards);
+            rg.startAnimation(rgSlideOutBackwards);
+            rg.startAnimation(rgSlideInBackwards);
         }
     }
 }

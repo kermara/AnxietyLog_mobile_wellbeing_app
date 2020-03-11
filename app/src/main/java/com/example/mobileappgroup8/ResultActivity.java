@@ -93,7 +93,6 @@ public class ResultActivity extends QuizActivity {
         }
     }
 
-
     public void AddData(String newPoints, String newDate, String newResult) {
         boolean insertData = myDb.insertData(newPoints, newDate, newResult);
         if (insertData == true) {

@@ -3,7 +3,6 @@ package com.example.mobileappgroup8;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +25,6 @@ import static com.example.mobileappgroup8.HistoryActivity.EXTRATWO;
 public class AnalysisActivity extends MainActivity {
 
     private DatabaseHelper db;
-    private SQLiteDatabase database;
     private TextView averageTv, countTv, changeTv, avgDescTv, averageTitleTv, countTitleTv, changeTitleTv, avgDescTitleTv, messageTv, modeTv;
     private Button homeButton, historyButton;
 
@@ -52,9 +50,8 @@ public class AnalysisActivity extends MainActivity {
 
         //Goes through the KEY_POINTS column of the SQL database and stores the result of the query.
         db = new DatabaseHelper(this);
-        database = db.getWritableDatabase();
         String change = "SELECT(" + KEY_POINTS + ") FROM " + DB_TABLE;
-        Cursor cursorLast = database.rawQuery(change, null);
+        Cursor cursorLast = db.getDb().rawQuery(change, null);
         cursorLast.moveToLast();
 
         /*If there are no intents the cursor is checked whether there are at least two entries
@@ -63,7 +60,7 @@ public class AnalysisActivity extends MainActivity {
         two entries, text views corresponding to statistics are set empty and a message is displayed.*/
         if (getIntent().getExtras() == null) {
             if (cursorLast.getCount() > 1) {
-                countTv.setText(Long.toString(DatabaseUtils.queryNumEntries(database, DB_TABLE)));
+                countTv.setText(Long.toString(DatabaseUtils.queryNumEntries(db.getDb(), DB_TABLE)));
                 float lastEntry = Float.valueOf(cursorLast.getString(0));
                 cursorLast.moveToPosition(cursorLast.getCount() - 2);
                 float secondLastEntry = Float.valueOf(cursorLast.getString(0));
@@ -75,7 +72,7 @@ public class AnalysisActivity extends MainActivity {
                     changeTv.setText("+" + changeSinceLast);
                 }
                 String average = "SELECT AVG(" + KEY_POINTS + ") FROM " + DB_TABLE;
-                Cursor cursorAvg = database.rawQuery(average, null);
+                Cursor cursorAvg = db.getDb().rawQuery(average, null);
                 cursorAvg.moveToFirst();
                 String averagePointsString = String.format("%.2f", Float.valueOf(cursorAvg.getString(0)));
                 Float averagePoints = Float.valueOf(averagePointsString);
