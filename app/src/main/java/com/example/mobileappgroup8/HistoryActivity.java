@@ -55,7 +55,7 @@ public class HistoryActivity extends MainActivity {
         db = new DatabaseHelper(this);
 
         pointsList = new ArrayList<>();
-        final Cursor cursor = db.viewData();
+        Cursor cursor = db.viewData();
         //New points-object is added to the list to be shown on the ListView from the database
         while (cursor.moveToNext()) {
             points = new Points(cursor.getString(1), cursor.getString(2), cursor.getString(3));

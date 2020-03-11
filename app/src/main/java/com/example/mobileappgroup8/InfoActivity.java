@@ -15,20 +15,23 @@ import android.widget.TextView;
 
 public class InfoActivity extends MainActivity {
 
+    private TextView tv, tv2, tv3, titleTv1, titleTv2, titleTv3;
+    private Button homeButton, testButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_activity);
 
-        TextView tv = findViewById(R.id.info_text_tv);
-        TextView tv2 = findViewById(R.id.info_text_tv2);
-        TextView tv3 = findViewById(R.id.info_text_tv3);
-        TextView titleTv1 = findViewById(R.id.info_title1_tv);
-        TextView titleTv2 = findViewById(R.id.info_title2_tv);
-        TextView titleTv3 = findViewById(R.id.info_title3_tv);
+        tv = findViewById(R.id.info_text_tv);
+        tv2 = findViewById(R.id.info_text_tv2);
+        tv3 = findViewById(R.id.info_text_tv3);
+        titleTv1 = findViewById(R.id.info_title1_tv);
+        titleTv2 = findViewById(R.id.info_title2_tv);
+        titleTv3 = findViewById(R.id.info_title3_tv);
 
-        Button homeButton = findViewById(R.id.home_button_info);
-        Button testButton = findViewById(R.id.test_button_info);
+        homeButton = findViewById(R.id.home_button_info);
+        testButton = findViewById(R.id.test_button_info);
 
         titleTv1.setText("About Anxiety Log\n");
 

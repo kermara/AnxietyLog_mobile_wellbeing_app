@@ -15,9 +15,17 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import static com.example.mobileappgroup8.Quiz.pointTotal;
+import static com.example.mobileappgroup8.Quiz.progressBarAnimation;
+import static com.example.mobileappgroup8.Quiz.questionNumberChanges;
+import static com.example.mobileappgroup8.Quiz.questionViewUpdate;
+import static com.example.mobileappgroup8.Quiz.storePoints;
+import static com.example.mobileappgroup8.Quiz.whichRadioButtonIsTicked;
+
 /**
  * QuizActivity shows 7 different questions in the quiz_activity. The results are stored and deleted in a 2d matrix based on the
- * RadioButton choices and the clicks of next/backbuttons. The point result is sent to ResultActivity with an Intent.
+ * RadioButton choices and the clicks of next/back buttons. The point result is sent to ResultActivity with an Intent.
+ * The methods used in QuizActivity are static methods from the Quiz class.
  *
  * @author Pauli Vuolle-Apiala
  * @version 1.1 3/2020
@@ -62,6 +70,7 @@ public class QuizActivity extends MainActivity {
         rgSlideOut = AnimationUtils.loadAnimation(this, R.anim.rg_slide_out_left);
         rgSlideInBackwards = AnimationUtils.loadAnimation(this, R.anim.rg_slide_in_left);
         rgSlideOutBackwards = AnimationUtils.loadAnimation(this, R.anim.rg_slide_out_right);
+
         //The quiz begins
         questionTV.setText(questions[(questionNumber - 1)]);
         numberView.setText(questionNumber + "/7");
@@ -73,28 +82,9 @@ public class QuizActivity extends MainActivity {
                 if (rg1.getCheckedRadioButtonId() == -1) {
                     errorView.setText("You have to select one of the choices");
                 } else {
-                    /*Based on which RadioButton is ticked, 0 - 3 points are stored in the matrix on the second row
-                    while the corresponding question number is stored in the first row right above the point result.*/
-                    switch (whichRadioButtonIsTicked()) {
-                        case 1:
-                            answeredQuestions[1][(questionNumber - 1)] = 0;
-                            answeredQuestions[0][(questionNumber - 1)] = questionNumber;
-                            break;
-                        case 2:
-                            answeredQuestions[1][(questionNumber - 1)] = 1;
-                            answeredQuestions[0][(questionNumber - 1)] = questionNumber;
-                            break;
-                        case 3:
-                            answeredQuestions[1][(questionNumber - 1)] = 2;
-                            answeredQuestions[0][(questionNumber - 1)] = questionNumber;
-                            break;
-                        case 4:
-                            answeredQuestions[1][(questionNumber - 1)] = 3;
-                            answeredQuestions[0][(questionNumber - 1)] = questionNumber;
-                            break;
-                    }
-                    /*if questionNumber-variable is 7 when the next-button is clicked the quiz ends and the ResultActivity begins.
-                    The point result is sent to the ResultActivity with an intent.*/
+                    //the storePoints method checks which radiobutton is ticked and stores the points on the second row of the matrix
+                    storePoints(questionNumber, answeredQuestions, whichRadioButtonIsTicked(rb2, rb3, rb4));
+                    //if questionNumber is 7 the quiz ends and the point result is sent to ResultActivity with an intent.
                     if (questionNumber == 7) {
                         Intent nextActivity = new Intent(QuizActivity.this, ResultActivity.class);
                         nextActivity.putExtra("Total points", pointTotal(answeredQuestions));
@@ -113,6 +103,7 @@ public class QuizActivity extends MainActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //if questionNumber is greater than 1 the back button click shows the previous question
                 if (questionNumber > 1) {
                     previousQuestion();
                 }
@@ -127,6 +118,7 @@ public class QuizActivity extends MainActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int option) {
                         if (option == -1) {
+                            //if the Yes button in the Alert Dialog is pressed the user is taken back to the Main Activity(starting activity)
                             Intent nextActivity = new Intent(QuizActivity.this, MainActivity.class);
                             startActivity(nextActivity);
                         }
@@ -138,64 +130,26 @@ public class QuizActivity extends MainActivity {
         });
     }
 
-    /*nextQuestion method updates the question to the next. The questionNumber variable is incremented and the backButton is made visible.
-    The next question animations are played, the errorView is set empty incase the nextButton is hit previously before selecting a radioButton
-    The question and question number are set to the next values and the radioGroup is cleared of any button selections.*/
+    //A method where multiple static methods from Quiz-class are grouped and used together.
+    //The booleans for methods are set "true" for the nextQuestion value, so that the correct messages and animations are displayed and played.
     private void nextQuestion() {
-        questionNumber++;
-        if (questionNumber > 1) {
-            backButton.setVisibility(View.VISIBLE);
-        }
+        questionNumber = questionNumberChanges(questionNumber, true, backButton);
         startAnimations(true, questionTV, rg1);
-        errorView.setText("");
-        questionTV.setText(questions[(questionNumber - 1)]);
-        numberView.setText(questionNumber + "/7");
-        rg1.clearCheck();
-        //progressbar animation that fills the bar smoothly
-        ObjectAnimator.ofInt(pBar, "progress", (pBar.getProgress() + 2000)).setDuration(250).start();
+        progressBarAnimation(pBar, true);
+        questionViewUpdate(answeredQuestions, questions, questionNumber, errorView, questionTV, numberView, rg1);
     }
 
-    /*previousQuestion method updates the question to the previous. The questionNumber variable is decremented and the backButton is hidden
-    if the user is on the first question. The previous question animations are played and the error view is set empty. RadioGroup is cleared of any buttons selection
-    The question number are set to the previous values.*/
+    //A method where multiple static methods from Quiz-class are grouped and used together.
+    //The booleans for methods are set "false" for the previousQuestion value, so that the correct messages and animations are displayed and played.
     private void previousQuestion() {
-        questionNumber--;
-        if (questionNumber == 1) {
-            backButton.setVisibility(View.INVISIBLE);
-        }
+        questionNumber = questionNumberChanges(questionNumber, false, backButton);
         startAnimations(false, questionTV, rg1);
-        answeredQuestions[1][(questionNumber - 1)] = 0;
-        errorView.setText("");
-        questionTV.setText(questions[(questionNumber - 1)]);
-        numberView.setText(questionNumber + "/7");
-        rg1.clearCheck();
-        ObjectAnimator.ofInt(pBar, "progress", (pBar.getProgress() - 2000)).setDuration(100).start();
+        progressBarAnimation(pBar, false);
+        questionViewUpdate(answeredQuestions, questions, questionNumber, errorView, questionTV, numberView, rg1);
     }
 
-    //Checks which of the radioButtons is ticked for the switch case in the nextButton onClickListener.
-    private int whichRadioButtonIsTicked() {
-        int buttonSelection = 1;
-        if (rb2.isChecked() == true) {
-            buttonSelection = 2;
-        } else if (rb3.isChecked() == true) {
-            buttonSelection = 3;
-        } else if (rb4.isChecked() == true) {
-            buttonSelection = 4;
-        }
-        return buttonSelection;
-    }
-
-    /*Calculates the second row of the matrix for the total points of the quiz.
-    The question numbers are stored on the first ([0]) row and the points to the corresponding question number
-    are stored on the row below.*/
-    private float pointTotal(int[][] matrix) {
-        float pointsTotal = 0f;
-        for (int i = 0; i < 7; i++) {
-            pointsTotal += matrix[1][i];
-        }
-        return pointsTotal;
-    }
-    public void startAnimations(boolean nextQuestion, TextView tv, RadioGroup rg) {
+    //A method where animations are grouped and played together. The nextQuestion boolean determines if the animations are played forwards or backwards.
+    private void startAnimations(boolean nextQuestion, TextView tv, RadioGroup rg) {
         if (nextQuestion == true) {
             tv.startAnimation(slideOut);
             tv.startAnimation(slideIn);

@@ -1,6 +1,5 @@
 package com.example.mobileappgroup8;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,21 +8,23 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import static com.example.mobileappgroup8.Quiz.whichAnxietyLevel;
 
 /**
- * The class is used to display information and store it in the SQL-database based on the point result received in the QuizActivity.
+ * Manages quiz results and feeds them to history and analysis
  *
- * @author Pauli Vuolle-Apiala, Kerttuli Ratilainen
- * @Version 1.1 3/2020
+ * @author Irina, Pauli and Kerttuli
+ * created on 10.3.2020
  */
+
 public class ResultActivity extends QuizActivity {
     private DatabaseHelper myDb;
     private TextView resultView, resultInfo, resultInfoTwo;
     private float totalPoints;
     private int totalPointsInt;
+    private Points pointsdb = new Points();
+    private Button history, analysis, home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,25 +34,34 @@ public class ResultActivity extends QuizActivity {
         resultView = findViewById(R.id.score_result);
         resultInfo = findViewById(R.id.info_result);
         resultInfoTwo = findViewById(R.id.desc_result);
-
-        Button history = findViewById(R.id.history_button_result);
-        Button analysis = findViewById(R.id.analysis_button_result);
-        Button home = findViewById(R.id.home_button_result);
+        history = findViewById(R.id.history_button_result);
+        analysis = findViewById(R.id.analysis_button_result);
+        home = findViewById(R.id.home_button_result);
 
         myDb = new DatabaseHelper(this);
-        //The intent is received from the QuizActivity and the points are used to show information in the TextViews.
+        /*The score result from QuizActivity is received as an intent
+        and the correct texts for the score amount are displayed on the screen with the WhichAnxietyLevel-method*/
         Intent quizIntent = getIntent();
         totalPoints = quizIntent.getFloatExtra("Total points", 0);
-        //The float is converted to an Int to show the number in the textView without any decimals.
         totalPointsInt = (int) (totalPoints);
         resultView.setText("Your anxiety score is " + totalPointsInt);
+        whichAnxietyLevel(totalPoints, resultInfo, resultInfoTwo);
 
-        //whichAnxietyLevel-method is used to display the correct message in the TextView.
-        whichAnxietyLevel(totalPoints);
-
-        collectData();
-
-        //OnclickListeners to switch between the activities with animations by pressing the buttons.
+        /**
+         * @param Points object
+         * @ feeds data for Points Object, needs data for ListView
+         */
+        pointsdb = new Points();
+        String PointsResult = Float.toString(totalPoints);
+        //String resultAdded = pointsdb.setResult(PointsResult);
+        String newPoints = pointsdb.getNewPoints(PointsResult);
+        String newDate = pointsdb.getNewDate();
+        //String newResult = pointsdb.getNewResult(resultAdded);
+        String newResult = "";
+        if (resultView.length() != 0) {
+            AddData(newPoints, newDate, newResult);
+        }
+        //OnClickListeners, animations and intents for the history, analysis and home buttons and switching to each of the activities
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +70,6 @@ public class ResultActivity extends QuizActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
-
         analysis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +78,6 @@ public class ResultActivity extends QuizActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
-
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,18 +88,13 @@ public class ResultActivity extends QuizActivity {
         });
     }
 
-    public void collectData() {
-        String newPoints = Float.toString(totalPoints);
-        @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        Date currentDate = new Date();
-        String newDate = format.format(currentDate);
-
-        String newResult = "";
-
-        if (resultView.length() != 0) {
-            AddData(newPoints, newDate, newResult);
-        }
-    }
+    /**
+     * @param newPoints
+     * @param newDate
+     * @param newResult
+     * @author Kerttuli
+     * @result sets data to database
+     */
 
     public void AddData(String newPoints, String newDate, String newResult) {
         boolean insertData = myDb.insertData(newPoints, newDate, newResult);
@@ -100,39 +103,6 @@ public class ResultActivity extends QuizActivity {
             Log.d("addData", "on tallentanut");
         } else {
             Toast.makeText(this, "Points not added", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    /**
-     * The method is used to set the right messages to the textViews based on the points the user received in the ResultActivity.
-     *
-     * @param totalPointsForMode totalPointsForMode is used to find out which case the totalPoints fall under and which text to set to the textViews.
-     */
-    protected void whichAnxietyLevel(float totalPointsForMode) {
-        int whichMode = 1;
-        if (totalPointsForMode > 4 && totalPointsForMode < 10) {
-            whichMode = 2;
-        } else if (totalPointsForMode > 9 && totalPointsForMode < 15) {
-            whichMode = 3;
-        } else if (totalPointsForMode > 14) {
-            whichMode = 4;
-        }
-        switch (whichMode) {
-            case 1:
-                resultInfo.setText("Low anxiety");
-                break;
-            case 2:
-                resultInfo.setText("Mild anxiety");
-                resultInfoTwo.setText("Monitor");
-                break;
-            case 3:
-                resultInfo.setText("Moderate anxiety");
-                resultInfoTwo.setText("Possible clinically significant condition");
-                break;
-            case 4:
-                resultInfo.setText("Severe anxiety");
-                resultInfoTwo.setText("Active treatment probably warranted");
-                break;
         }
     }
 }
