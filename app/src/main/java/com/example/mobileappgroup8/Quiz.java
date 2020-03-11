@@ -2,6 +2,7 @@ package com.example.mobileappgroup8;
 
 import android.animation.ObjectAnimator;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -66,6 +67,13 @@ public class Quiz {
         }
     }
 
+    /**
+     * Calculates the sum of the elements on the bottom row of a 2 row matrix.
+     * Calculates the score result of the QuizActivity.
+     *
+     * @param matrix matrix that has the question numbers on the top row and the score results on the bottom row
+     * @return total sum of the elements on the bottom row of the matrix
+     */
     public static float pointTotal(int[][] matrix) {
         float pointsTotal = 0f;
         for (int i = 0; i < 7; i++) {
@@ -74,6 +82,12 @@ public class Quiz {
         return pointsTotal;
     }
 
+    /**
+     * Gives the progress bar a "smooth" animation of slowly progressing.
+     *
+     * @param pBar         the progress bar the animation is wanted on
+     * @param nextQuestion Boolean that determines if the progress bar progress increases or decreases
+     */
     public static void progressBarAnimation(ProgressBar pBar, boolean nextQuestion) {
         if (nextQuestion == true) {
             ObjectAnimator.ofInt(pBar, "progress", (pBar.getProgress() + 2000)).setDuration(100).start();
@@ -82,6 +96,17 @@ public class Quiz {
         }
     }
 
+    /**
+     * Updates the textviews, sets the bottom row of the matrix on the current question to a zero and resets the radio buttons.
+     *
+     * @param answeredQuestions Matrix that stores the points of the quiz
+     * @param questions         String array that contains the questions
+     * @param questionNumber    Number of the current question(1 - 7)
+     * @param a                 textView that is set to a null on method call
+     * @param b                 the quiz question is displayed on this textView
+     * @param c                 the number of the current question is displayed on this textView
+     * @param rg1               RadioButtons are cleared of any selection
+     */
     public static void questionViewUpdate(int answeredQuestions[][], String[] questions, int questionNumber, TextView a, TextView b, TextView c, RadioGroup rg1) {
         answeredQuestions[1][(questionNumber - 1)] = 0;
         a.setText(null);
@@ -90,16 +115,25 @@ public class Quiz {
         rg1.clearCheck();
     }
 
-    public static int questionNumberChanges(int questionNumber, boolean nextQuestion, TextView a) {
+    /**
+     * This method increments and decrements the questionNumber variable that keeps track of the current question the quiz is on.
+     * This method also hides the backButton on the first question.
+     *
+     * @param questionNumber the current question that the quiz is on
+     * @param nextQuestion   this boolean determines if the quiz is going forward or backward
+     * @param b              Button that the method sets invisible if the questionNumber is 1 (quiz is on the first question)
+     * @return questionNumber after incrementing or decrementing
+     */
+    public static int questionNumberChanges(int questionNumber, boolean nextQuestion, Button b) {
         if (nextQuestion == true) {
             questionNumber++;
         } else {
             questionNumber--;
         }
         if (questionNumber > 1) {
-            a.setVisibility(View.VISIBLE);
+            b.setVisibility(View.VISIBLE);
         } else {
-            a.setVisibility(View.INVISIBLE);
+            b.setVisibility(View.INVISIBLE);
         }
         return questionNumber;
     }
