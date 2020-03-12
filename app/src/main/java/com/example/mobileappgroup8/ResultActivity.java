@@ -53,11 +53,10 @@ public class ResultActivity extends QuizActivity {
          */
         pointsdb = new Points();
         String PointsResult = Float.toString(totalPoints);
-        //String resultAdded = pointsdb.setResult(PointsResult);
+        String resultAdded = pointsdb.setResult(PointsResult);
         String newPoints = pointsdb.getNewPoints(PointsResult);
         String newDate = pointsdb.getNewDate();
-        //String newResult = pointsdb.getNewResult(resultAdded);
-        String newResult = "";
+        String newResult = pointsdb.getNewResult(resultAdded);
         if (resultView.length() != 0) {
             AddData(newPoints, newDate, newResult);
         }
