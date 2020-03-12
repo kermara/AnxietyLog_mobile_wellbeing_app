@@ -99,7 +99,7 @@ public class Stats {
                 a.setText("Moderate anxiety");
                 b.setText("Possible clinically significant condition");
 
-            } else if (points > 15) {
+            } else if (points >= 15) {
                 a.setText("Severe anxiety");
                 b.setText("Active treatment probably warranted");
             }

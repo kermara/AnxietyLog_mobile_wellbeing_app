@@ -35,6 +35,7 @@ public class HistoryActivity extends MainActivity {
     private List<Points> pointsList;
     protected static final String EXTRA = "com.example.mobileappgroup8.MESSAGE";
     protected static final String EXTRATWO = "com.example.mobileappgroup8.MESSAGE2";
+    //protected static final String EXTRATHREE = "com.example.mobileappgroup8.MESSAGE3";
 
 
     @Override
@@ -113,8 +114,10 @@ public class HistoryActivity extends MainActivity {
                 Intent intent = new Intent(HistoryActivity.this, AnalysisActivity.class);
                 String pointsFromListView = ((TextView) view.findViewById(R.id.tvPoints)).getText().toString();
                 String dateFromListView = ((TextView) view.findViewById(R.id.tvDate)).getText().toString();
+                //String resultFromListView = ((TextView) view.findViewById(R.id.tvDate)).getText().toString();
                 intent.putExtra(EXTRATWO, dateFromListView);
                 intent.putExtra(EXTRA, pointsFromListView);
+                //intent.putExtra(EXTRATHREE, resultFromListView);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
